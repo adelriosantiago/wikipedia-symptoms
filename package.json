@@ -1,0 +1,46 @@
+{
+  "name": "meanBoilerplate",
+  "version": "4.0.0",
+  "private": true,
+  "scripts": {
+    "start": "nodemon app.js",
+    "jscoffee": "cd public && coffeebar -o js/ -mw coffee/",
+    "coffeejs": "cd public && coffee -o js/ -cw coffee/",
+    "smushimg": "cd public && smushit -R -- img/",
+    "createadmin": "cd config && coffee createadmin.coffee",
+    "scaffold": "cd config && coffee scaffold.coffee"
+  },
+  "dependencies": {
+    "express": "4.x",
+    "jade": "*",
+    "node-sass-middleware": "*",
+    "coffee-script": "1.9.0",
+    "mongoose": "4.x",
+    "crypto": "*",
+    "yaml-config": "*",
+    "body-parser": "*",
+    "serve-favicon": "*",
+    "serve-static": "*",
+    "method-override": "*",
+    "morgan": "*",
+    "errorhandler": "*",
+    "cluster": "*",
+    "cookie-parser": "*",
+    "express-session": "*",
+    "connect-mongo": "*",
+    "connect-timeout": "*",
+    "connect-flash": "*",
+    "express-device": "*",
+    "passport": "*",
+    "passport-local": "*",
+    "bcrypt": "*"
+  },
+  "devDependencies": {
+    "nodemon": "*",
+    "coffeebar": "*",
+    "node-smushit": "*",
+    "fs": "*",
+    "fs-extra": "*",
+    "replace": "*"
+  }
+}

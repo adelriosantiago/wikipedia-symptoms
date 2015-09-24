@@ -1,0 +1,15 @@
+default:
+  mongodb_uri: "mongodb://localhost/meandb"
+  sessions_secret: "keyboard cat"
+
+development:
+  mongodb_uri: "mongodb://localhost/meandb"
+  sessions_secret: "keyboard cat"
+
+test:
+  mongodb_uri: "mongodb://localhost/meandb"
+  sessions_secret: "keyboard cat"
+
+production:
+  mongodb_uri: "mongodb://localhost/meandb"
+  sessions_secret: "keyboard cat"
