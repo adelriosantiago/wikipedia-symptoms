@@ -53,6 +53,14 @@ module.exports = (app, passport) ->
 	app.get "/", (req, res) ->
 		res.render "home.jade"
 	
+	#Bigdoc API get diagnose
+	app.get "/api/diagnose", (req, res) ->
+		res.json "{a:b, c:d}"
+		
+	#Bigdoc API get info
+	app.get "/api/info", (req, res) ->
+		res.json "{db_status:null, db_entries:null}"
+	
 	#Original information page
 	app.get "/info", (req, res) ->
 		res.render("info.jade")
