@@ -4,6 +4,8 @@ MongoClient = require('mongodb').MongoClient;
 assert = require('assert')
 
 console.log "Started"
+mongoDBUrl = 'mongodb://localhost:27017/bigdoc';
+
 
 ###
 articles = []
@@ -16,10 +18,8 @@ rl.on "error", (e) ->
 
 rl.on "end", (e) ->
 	console.log("End reading file")
-	
-url = 'mongodb://localhost:27017/bigdoc';
 
-MongoClient.connect url, (err, db) ->
+MongoClient.connect mongoDBUrl, (err, db) ->
 	assert.equal null, err
 	console.log "Connected to the server"
 	
@@ -55,7 +55,22 @@ module.exports = (app, passport) ->
 	
 	#Bigdoc API get diagnose
 	app.get "/api/diagnose", (req, res) ->
-		res.json "{a:b, c:d}"
+		#TODO: Sanitize query.symptoms entry
+		
+		symptoms = req.query.symptoms
+		
+		#TODO: Perform the DB text search
+		MongoClient.connect mongoDBUrl, (err, db) ->
+			diseases = db.collection 'testing'
+			
+			(diseases.find {}).toArray((err, docs) -> 
+				assert.equal null, err
+				console.dir(docs)
+				return
+			)
+		
+		response = {symptoms: symptoms, result: "result"}
+		res.json response
 		
 	#Bigdoc API get info
 	app.get "/api/info", (req, res) ->
