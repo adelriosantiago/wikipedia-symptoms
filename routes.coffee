@@ -63,7 +63,7 @@ module.exports = (app, passport) ->
 		MongoClient.connect mongoDBUrl, (err, db) ->
 			diseases = db.collection 'testing'
 			
-			(diseases.find {}).toArray((err, docs) -> 
+			(diseases.find {'text' : {'search' : "cough"}}, {'score' : {'meta' : 'textScore' }}).toArray((err, docs) -> 
 				assert.equal null, err
 				console.dir(docs)
 				return
@@ -78,7 +78,7 @@ module.exports = (app, passport) ->
 	
 	#Original information page
 	app.get "/info", (req, res) ->
-		res.render("info.jade")
+		res.render "info.jade"
     
 	###
 	# Passport Auth
