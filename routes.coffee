@@ -67,7 +67,7 @@ module.exports = (app, passport) ->
 				assert.equal null, err
 				console.dir(docs)
 				response = {symptoms: symptoms, result: docs}
-				res.json response
+				res.render "home.jade", {response: JSON.stringify response, null, 4}
 				return
 			)
 		
