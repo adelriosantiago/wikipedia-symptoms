@@ -4,4 +4,10 @@
 # License: Coffeeware <https://github.com/Jmlevick/coffeeware-license>
 
 $ ->
-  $("#texti").val("")
+	$("#symptoms").keyup((ev) ->
+		symptoms = $("#symptoms").val().split(/[\s,]+/);
+		$("#filtered-symptoms").val(symptoms.join(','));
+		console.dir symptoms;
+	);
+	$("#texti").val("");
+  
