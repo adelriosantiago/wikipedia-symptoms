@@ -4,15 +4,20 @@
 # License: Coffeeware <https://github.com/Jmlevick/coffeeware-license>
 
 $ ->
-	connectors = ['the', 'and', 'or'];
-	relevant = ['pain', 'coughing', 'sneezing'];
+	connector = ['the', 'and', 'or']
+	relevant = ['pain', 'coughing', 'sneezing']
 	
 	$("#symptoms").keyup((ev) ->
-		symptoms = $("#symptoms").val().split(/[\s,]+/);
+		symptoms = $("#symptoms").val().split(/[\s,]+/)
+		filtered = []
 		
-				
-		$("#filtered-symptoms").html(symptoms.join(','));
-		console.dir symptoms;
+		for word in symptoms
+			if word in connector then filtered.push '<span class="connector">' + word + '</span>' 
+			else if word in relevant then filtered.push '<span class="relevant">' + word + '</span>' 
+			else filtered.push word
+		
+		$("#filtered-symptoms").html(filtered.join(','))
+		console.dir symptoms
 	);
-	$("#texti").val("");
+	$("#texti").val("")
   
