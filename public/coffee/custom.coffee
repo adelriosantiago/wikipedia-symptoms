@@ -4,9 +4,14 @@
 # License: Coffeeware <https://github.com/Jmlevick/coffeeware-license>
 
 $ ->
+	connectors = ['the', 'and', 'or'];
+	relevant = ['pain', 'coughing', 'sneezing'];
+	
 	$("#symptoms").keyup((ev) ->
 		symptoms = $("#symptoms").val().split(/[\s,]+/);
-		$("#filtered-symptoms").val(symptoms.join(','));
+		
+				
+		$("#filtered-symptoms").html(symptoms.join(','));
 		console.dir symptoms;
 	);
 	$("#texti").val("");

@@ -52,17 +52,17 @@ module.exports = (app, passport) ->
 	#Bigdoc hompage
 	app.get "/", (req, res) ->
 		res.render "home.jade"
-	
+
 	#Bigdoc API get diagnose
 	app.get "/api/diagnose", (req, res) ->
 		#TODO: Sanitize query.symptoms entry
-		
-		symptoms = req.query.symptoms		
-		
+
+		symptoms = req.query.symptoms
+
 		#TODO: Perform the DB text search
 		MongoClient.connect mongoDBUrl, (err, db) ->
 			diseases = db.collection 'diseases'
-			
+
 			((diseases.find {$text : {$search : symptoms}}, {"score" : {$meta : "textScore"}, "text" : 0}).sort {"score" : {$meta : "textScore"}}).toArray((err, docs) ->
 				assert.equal null, err
 				console.dir(docs)
@@ -70,15 +70,15 @@ module.exports = (app, passport) ->
 				res.render "home.jade", {response: JSON.stringify response, null, 4}
 				return
 			)
-		
+
 	#Bigdoc API get info
 	app.get "/api/info", (req, res) ->
 		res.json "{db_status:null, db_entries:null}"
-	
+
 	#Original information page
 	app.get "/info", (req, res) ->
 		res.render "info.jade"
-    
+
 	###
 	# Passport Auth
 	app.get "/login", (req, res) ->
@@ -86,12 +86,12 @@ module.exports = (app, passport) ->
 
 		app.get "/test", (req, res) ->
 		res.render("login.jade")
-	
+
 	app.get '/logout', (req, res) ->
 		req.logout()
 		req.flash('passport-success-logout', 'Logged out successfully!')
 		res.redirect '/'
-	
+
 	app.post '/login', passport.authenticate('local'), (req, res) ->
 		redirection_url = if  req.headers.referer.indexOf('/login') is -1 then req.headers.referer else '/'
 		req.flash('passport-success-login', 'Logged in successfully!')
