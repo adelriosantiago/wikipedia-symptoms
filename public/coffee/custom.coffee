@@ -7,8 +7,9 @@ $ ->
 	connectorStr = ['the', 'and', 'or']
 	relevantStr = ['pain', 'coughing', 'sneezing']
 	
-	$("#symptoms").keyup((ev) ->
-		symptoms = $("#symptoms").val().split /[\s,]+/
+	do filter_diseases = ->
+		outString = $("#symptoms").val().replace(/[`~!@#$%^&*()_|+\=?;:'",.<>\{\}\[\]\\\/]/gi, ' ');
+		symptoms = outString.split /[\s,]+/
 		filtered = []
 		
 		for word in symptoms
@@ -18,6 +19,9 @@ $ ->
 		
 		$("#filtered-symptoms").html filtered.join ','
 		console.dir symptoms
-	);
+	
+	$("#symptoms").keyup((ev) -> filter_diseases());
+	
+	
 	$("#texti").val("")
   

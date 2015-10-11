@@ -39,7 +39,9 @@ MongoClient.connect mongoDBUrl, (err, db) ->
 				console.log "About to insert: " + name
 				
 				diseases.insert dbEntry, (err, result) ->
-					return console.log err if err					
+					return console.log err if err
+					
+					#TODO: Close db
 					
 					console.log "Inserted: " + name + " with result ", result
 		
