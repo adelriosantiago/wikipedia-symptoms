@@ -1,13 +1,36 @@
 extends layout
 
 block content
-	div.col-xs-12.col-md-9.col-md-offset-1.mean-div
-		h2 BigDoc disease diagnosis
-		br
-		h4 Write down your symptoms like if you were speaking to a real doctor
-		textarea(id='symptoms')
-		br
-		filter(id='filtered-symptoms')
+	div.col-xs-10.col-xs-offset-1.common-block
+		div
+			h2 BigDoc disease diagnosis
+			//h4 Bigdoc is a small real-time app that diagnoses diseases based on signs and symptoms. With this small program you can diagnose... Read my blog post explaining how it works at... Bear mind that this symptom diagnoser is highly experimental, do *never* use this to self- medicate and/or avoid visiting a real doctor.
+			
+		div.row.margin-top-50
+			div.col-xs-10.col-xs-offset-1
+				h4 Write down your symptoms like if you were speaking to a real doctor or click on a sample to see how it works:
+				div.row.text-center
+					div.col-xs-4
+						a Common cold
+						//i.fa.fa-home
+					div.col-xs-4
+						a Pneumonia
+					div.col-xs-4
+						a Infection
+				textarea#symptoms.margin-top-10
+				h4 Based on your input, here are a list of some relevant signs and symptoms:
+				pre
+					filter(id='filtered-symptoms')
+				h4 Bigdoc will now search for these information on several thousand articles from the internet:
+					div
+						h1 screen
+				h4 Finally here are the names of the diseases that match your input:
+				div
+					h1 wordcloud
+					pre
+						{a:b, c:d}
+				h4 There are 80% chances that the described symptoms are related to
+					h1 disease
 		//Replace for a CSS rule
 		br
 		br
