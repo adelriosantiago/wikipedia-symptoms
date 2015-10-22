@@ -10,3 +10,5 @@ npm-debug.log
 node_modules
 public/bower/bower_components
 
+Gemfile.lock
+build/config.gypi
