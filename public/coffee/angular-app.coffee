@@ -3,8 +3,9 @@
 # MEAN Boilerplate by @Jmlevick <http://jmlevick.me>
 # License: Coffeeware <https://github.com/Jmlevick/coffeeware-license>
 
-app = angular.module 'symApp', []
+app = angular.module 'bigdoc-app', []
 app.controller 'symCtrl', ($scope) ->
-	alert 'ab'
 	$scope.testinput = "abc"
 	return
+
+

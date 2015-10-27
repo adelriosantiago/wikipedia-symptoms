@@ -5,7 +5,7 @@
 //- License: Coffeeware <https://github.com/Jmlevick/coffeeware-license>
 
 doctype
-html(ng-app, lang='en-US')
+html(ng-app='bigdoc-app', lang='en-US')
 head
 	meta(charset='UTF-8')
 	title MEAN Boilerplate: myApp
@@ -21,16 +21,16 @@ head
 	link(rel='stylesheet', href='/bower/bower_components/bootstrap/dist/css/bootstrap-theme.min.css')
 	link(rel='stylesheet', href='/css/default.css')
 	script(src='/bower/bower_components/jquery/dist/jquery.min.js')
+	script(src='/bower/bower_components/angular/angular.min.js')
+	script(src='/bower/bower_components/angular-resource/angular-resource.min.js')
+	script(src='/bower/bower_components/angular-animate/angular-animate.min.js')
 
 	body
 		div.container
 			div.row
 				block content
 
-	script(src='/bower/bower_components/angular/angular.min.js')
-	script(src='/bower/bower_components/angular-resource/angular-resource.min.js')
-	script(src='/bower/bower_components/angular-animate/angular-animate.min.js')
-	script(src='/js/angular-app.js') 
+	script(src='/js/angular-app.js')
 	script(src='/js/custom.js')
 	script(src='/js/d3.js')
 	script(src='/js/d3.wordcloud.js')
