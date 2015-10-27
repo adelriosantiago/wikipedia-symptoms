@@ -1,3 +1,5 @@
+#TODO: Solve the DB not closing
+
 readline = require('linebyline')
 Wiki = require('wikijs')
 MongoClient = require('mongodb').MongoClient;
@@ -41,8 +43,7 @@ MongoClient.connect mongoDBUrl, (err, db) ->
 				diseases.insert dbEntry, (err, result) ->
 					return console.log err if err
 					
-					#TODO: Close db
-					
+					#TODO: Important to close db
 					console.log "Inserted: " + name + " with result ", result
 		
 		console.log "End"
