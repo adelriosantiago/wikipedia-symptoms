@@ -69,8 +69,11 @@ module.exports = (app, passport) ->
 			((diseases.find {$text : {$search : symptoms}}, {"score" : {$meta : "textScore"}, "text" : 0}).sort {"score" : {$meta : "textScore"}}).toArray((err, docs) ->
 				assert.equal null, err
 				console.dir(docs)
-				response = {symptoms: symptoms, result: docs}
-				res.render "home.jade", {response: JSON.stringify response, null, 4}
+				#response = {symptoms: symptoms, result: docs}
+				#res.render "home.jade", {response: JSON.stringify response, null, 4}
+				res.json({symptoms: symptoms, result: docs})
+				#TODO: Close DB!
+				#BUG: Close DB!
 				return
 			)
 
