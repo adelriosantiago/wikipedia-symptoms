@@ -7,11 +7,12 @@ app = angular.module 'bigdoc-app', []
 app.controller 'symCtrl', ($scope, $http) ->
 	console.log 'req'
 	($http.get 'api/diagnose?symptoms=cold').success((data, status, headers, config) ->
-		#console.log 'json back' + $scope.testinput
+		console.log 'json back' + data
 		alert 'json back' + $scope.testinput
 		console.log data
 		#$scope.testinput = data;
 		$scope.testinput2 = data;
+		$scope.testinput3 = data;
 	).error((data, status, headers, config) ->
 		#log error
     );
