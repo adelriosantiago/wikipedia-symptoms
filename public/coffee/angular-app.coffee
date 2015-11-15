@@ -9,11 +9,11 @@ app.controller 'exampleCtrl', ($scope, $http) ->
 	console.log 'exampleCtrl'
 	
 	$scope.$watch 'inputCh', (newText) ->
-		console.log 'inputCh changed ' + newText
+		#console.log 'inputCh changed ' + newText
 		($http.get 'api/diagnose?symptoms=' + newText).success((data, status, headers, config) ->
-			console.dir 'json back2', data.toString()
-			console.log JSON.stringify data
-			$scope.testinput = data;
+			#console.dir 'json back2', data.toString()
+			#console.log JSON.stringify data
+			$scope.resultJSON = data;
 		).error((data, status, headers, config) ->
 			#log error
 		);

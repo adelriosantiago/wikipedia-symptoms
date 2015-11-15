@@ -3,6 +3,9 @@
 # MEAN Boilerplate by @Jmlevick <http://jmlevick.me>
 # License: Coffeeware <https://github.com/Jmlevick/coffeeware-license>
 
+window.thecloud = null;
+window.drawfunc = null;
+
 $ ->
 	connectorStr = ['the', 'and', 'or']
 	relevantStr = ['pain', 'coughing', 'sneezing']
@@ -20,7 +23,7 @@ $ ->
 		$("#filtered-symptoms").html filtered.join ','
 		#console.dir symptoms
 	
-	$("#symptoms").keyup((ev) -> filter_diseases());
+	$("#symptoms").keyup((ev) -> filter_diseases())
 	
 	#$("#texti").val("")
 	
@@ -28,9 +31,11 @@ $ ->
 	#The D3 wordcloud
 	fill = d3.scale.category20();
 
-	d3.layout.cloud()
+	console.log 'thecloud'
+	
+	window.thecloud = d3.layout.cloud()
 		.size [300, 300]
-		.words [".NET", "Silverlight", "jQuery", "CSS3", "HTML5", "JavaScript", "SQL","C#"].map (d) -> 
+		.words [".NET", "Silverlight", "jQueryx", "CSS3", "HTML5", "JavaScript", "SQL","C#"].map (d) -> 
 			return {text: d, size: 10 + Math.random() * 50};
 		.rotate ->
 			return ~~(Math.random() * 2) * 90;
@@ -39,6 +44,8 @@ $ ->
 			return d.size;
 		.on "end", draw
 		.start();
+
+	console.dir window.thecloud
 	
 	#TODO: Change the following code to CS!
 	`
@@ -62,4 +69,5 @@ $ ->
 		.text(function(d) { return d.text; });
 	}
 	`
+	console.log 'end2'
 

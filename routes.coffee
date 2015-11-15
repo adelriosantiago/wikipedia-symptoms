@@ -72,8 +72,9 @@ module.exports = (app, passport) ->
 				#response = {symptoms: symptoms, result: docs}
 				#res.render "home.jade", {response: JSON.stringify response, null, 4}
 				res.json({symptoms: symptoms, result: docs})
-				#TODO: Close DB!
-				#BUG: Close DB!
+
+				#NOTE: Can this be optimized?
+				db.close()
 				return
 			)
 
