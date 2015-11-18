@@ -203,7 +203,7 @@
 }("undefined" == typeof exports ? d3.layout || (d3.layout = {}) : exports);
 
 var fill = d3.scale.category20b(),
-	w = 960,
+	w = 800,
 	h = 600,
 	words = [],
 	max, scale = 1,
@@ -256,6 +256,7 @@ function draw(t, e) {
 
 //Event listeners
 $("#sympt").keyup(function(ev) {
+	console.log('key');
 	tags = d3.select("#sympt").property("value");
 	tags = JSON.parse(tags);
 	generate();
