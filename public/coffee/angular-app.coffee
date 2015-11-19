@@ -12,6 +12,7 @@ app.controller 'exampleCtrl', ($scope, $http) ->
 		#console.log 'inputCh changed ' + newText
 		($http.get 'api/diagnose?symptoms=' + newText).success((data, status, headers, config) ->
 			#console.log JSON.stringify data
+			#Format data to show only the "results" key here in integers
 			$scope.resultJSON = data;
 		).error((data, status, headers, config) ->
 			#log error

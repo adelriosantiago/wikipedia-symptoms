@@ -221,6 +221,7 @@ var fill = d3.scale.category20b(),
 	vis = svg.append("g").attr("transform", "translate(" + [w >> 1, h >> 1] + ")");
 
 function generate() {
+	//TODO: Sort descending the array tags here
 	layout.font(d3.select("#font").property("value")).spiral(d3.select("input[name=spiral]:checked").property("value")), fontSize = d3.scale[d3.select("input[name=scale]:checked").property("value")]().range([10, 100]), tags.length && fontSize.domain([+tags[tags.length - 1].value || 1, +tags[0].value]), complete = 0, statusText.style("display", null), words = [], layout.stop().words(tags.slice(0, max = Math.min(tags.length, +d3.select("#max").property("value")))).start()
 }
 
@@ -259,6 +260,7 @@ $("#sympt").keyup(function(ev) {
 	console.log('key');
 	tags = d3.select("#sympt").property("value");
 	tags = JSON.parse(tags);
+	console.dir(tags);
 	generate();
 });
 
