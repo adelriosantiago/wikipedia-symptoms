@@ -5,6 +5,7 @@
 
 window.thecloud = null;
 window.drawfunc = null;
+window.wordsMatch = null;
 
 $ ->
 	connectorStr = ['the', 'and', 'or']
@@ -31,8 +32,8 @@ $ ->
 	fill = d3.scale.category20();
 	
 	window.thecloud = d3.layout.cloud()
-		.size [300, 300]
-		.words [".NET", "Silverlight", "jQueryx", "CSS3", "HTML5", "JavaScript", "SQL","C#"].map (d) -> 
+		.size[300, 300]
+		.words[".NET", "Silverlight", "jQueryx", "CSS3", "HTML5", "JavaScript", "SQL","C#"].map (d) -> 
 			return {text: d, size: 10 + Math.random() * 50};
 		.rotate ->
 			return ~~(Math.random() * 2) * 90;

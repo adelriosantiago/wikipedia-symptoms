@@ -65,18 +65,18 @@ module.exports = (app, passport) ->
 		#TODO: Perform the DB text search
 		MongoClient.connect mongoDBUrl, (err, db) ->
 			diseases = db.collection 'diseases'
-
-			((diseases.find {$text : {$search : symptoms}}, {"value" : {$meta : "textScore"}, "text" : 0, "_id" : 0}).sort {"value" : {$meta : "textScore"}}).toArray((err, docs) ->
-				assert.equal null, err
-				console.dir(docs)
-				#response = {symptoms: symptoms, result: docs}
-				#res.render "home.jade", {response: JSON.stringify response, null, 4}
-				res.json({symptoms: symptoms, result: docs})
-				#NOTE: Can this be optimized?
+			diseases.aggregate([
+				{$match: {$text: {$search: symptoms}}},
+				{$project: {"_id" : 0, "key" : "$_id", value: {$multiply : [{ $meta: "textScore" }, 10]}}},
+				{$sort: {score: {$meta: "textScore" }}}
+			]).toArray((err, docs) ->
+				assert.equal err, null
+				console.log docs
+				res.json {diseases: docs, symptoms: symptoms}
 				db.close()
 				return
-			)
-
+			);
+			
 	#Bigdoc API get info
 	app.get "/api/info", (req, res) ->
 		res.json "{db_status:null, db_entries:null}"
