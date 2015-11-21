@@ -19,13 +19,32 @@ block content
 						div.col-xs-4
 							a Infection
 					textarea(ng-model="inputCh")#symptoms.margin-top-10
-					h4 Based on your input, here are a list of some relevant signs and symptoms:
+					//h4 Based on your input, here are a list of some relevant signs and symptoms:
 					pre
 						filter(id='filtered-symptoms')
 					//h4 Bigdoc is now searching for these information on several thousand articles from the internet:
 					//	div
 					//		h1 screen
 					h4 As you write, here are the names of the diseases that match your input:
+					
+					//div
+					//	ul(class="nav nav-tabs")
+					//		li(role="presentation" class="active")
+					//			a(href="#") HomeA
+					//		li(role="presentation")
+					//			a(href="#") HomeB
+					//		li(role="presentation")
+					//			a(href="#") HomeC
+					
+					div(class="panel panel-default")
+						div.panel-body
+							Basic panel
+						div.panel-footer
+							button(type="button" class="btn btn-default btn-xs inline right")
+								span Switch to JSON
+							br
+							//p.inline Switch to
+					
 					div
 						div#vis
 						form#form
