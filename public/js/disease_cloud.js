@@ -219,6 +219,9 @@ var fill = d3.scale.category20b(),
 	svg = d3.select("#vis").append("svg").attr("width", w).attr("height", h),
 	background = svg.append("g"),
 	vis = svg.append("g").attr("transform", "translate(" + [w >> 1, h >> 1] + ")");
+	//vis = svg.append("g")
+	//	.attr("width", '100%')
+	//	.attr("height", '100%')
 
 function generate() {
 	//TODO: Sort descending the array wordsMatch here

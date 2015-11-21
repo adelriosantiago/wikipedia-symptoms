@@ -1,7 +1,7 @@
 extends layout
 
 block content
-	div.col-xs-10.col-xs-offset-1.common-block
+	div.col-xs-12.common-block
 		div
 			h2 BigDoc disease diagnosis
 			//h4 Bigdoc is a small real-time app that diagnoses diseases based on signs and symptoms. With this small program you can diagnose... Read my blog post explaining how it works at... Bear mind that this symptom diagnoser is highly experimental, do *never* use this to self- medicate and/or avoid visiting a real doctor. By using this app you agree that...
@@ -26,57 +26,45 @@ block content
 					//	div
 					//		h1 screen
 					h4 As you write, here are the names of the diseases that match your input:
-					
-					//div
-					//	ul(class="nav nav-tabs")
-					//		li(role="presentation" class="active")
-					//			a(href="#") HomeA
-					//		li(role="presentation")
-					//			a(href="#") HomeB
-					//		li(role="presentation")
-					//			a(href="#") HomeC
-					
-					div(class="panel panel-default")
+					div(class="panel panel-default" style='min-width: 800px;')
 						div.panel-body
-							Basic panel
+							div#vis(style='min-width: 800px;')
+							form#form
+								p(style='position: absolute; right: 0px; top: 0px; display: none;')#status 5/5
+								//div
+								//	textarea#sympt [{"key":"abc","value":3},{"key":"cde","value":2},{"key":"zxc","value":1}]
+								div
+									p
+										label Spiral:
+										label(for='archimedean')
+											input(name="spiral" id="archimedean" value="archimedean" checked="checked" type="radio")
+											Archimedean
+										label(for='rectangular')
+											input(name="spiral" id="rectangular" value="rectangular" type="radio")
+											Rectangular
+									p
+										label Scale:
+										label(for='scale-log')
+											input(name="scale" id="scale-log" value="log" checked="checked" type="radio")
+											log n
+										label(for='scale-sqrt')
+											input(name="scale" id="scale-sqrt" value="sqrt" type="radio")
+											√n
+										label(for='scale-linear')
+											input(name="scale" id="scale-linear" value="linear" type="radio")
+											n
+									p
+										label Font:
+											input(id="font" value="Impact" type="text")
+									p
+										label(for='max') Number of words:
+											input(id="max" value="250" min="1" type="number")
 						div.panel-footer
-							button(type="button" class="btn btn-default btn-xs inline right")
-								span Switch to JSON
+							button(type="button" class="btn btn-default btn-xs right" ng-click="switchData()")
+								span {{switchLabel}}
 							br
-							//p.inline Switch to
 					
 					div
-						div#vis
-						form#form
-							p(style='position: absolute; right: 0px; top: 0px; display: none;')#status 5/5
-							div
-								textarea#sympt [{"key":"abc","value":3},{"key":"cde","value":2},{"key":"zxc","value":1}]
-							div
-								p
-									label Spiral:
-									label(for='archimedean')
-										input(name="spiral" id="archimedean" value="archimedean" checked="checked" type="radio")
-										Archimedean
-									label(for='rectangular')
-										input(name="spiral" id="rectangular" value="rectangular" type="radio")
-										Rectangular
-								p
-									label Scale:
-									label(for='scale-log')
-										input(name="scale" id="scale-log" value="log" checked="checked" type="radio")
-										log n
-									label(for='scale-sqrt')
-										input(name="scale" id="scale-sqrt" value="sqrt" type="radio")
-										√n
-									label(for='scale-linear')
-										input(name="scale" id="scale-linear" value="linear" type="radio")
-										n
-								p
-									label Font:
-										input(id="font" value="Impact" type="text")
-								p
-									label(for='max') Number of words:
-										input(id="max" value="250" min="1" type="number")
 						pre#json
 							{{resultJSON}}
 					h4 There are 80% chances that the described symptoms are related to:
