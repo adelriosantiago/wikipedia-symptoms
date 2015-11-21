@@ -27,11 +27,8 @@ $ ->
 	
 	#$("#texti").val("")
 	
-	
 	#The D3 wordcloud
 	fill = d3.scale.category20();
-
-	console.log 'thecloud'
 	
 	window.thecloud = d3.layout.cloud()
 		.size [300, 300]
@@ -69,5 +66,3 @@ $ ->
 		.text(function(d) { return d.text; });
 	}
 	`
-	console.log 'end2'
-

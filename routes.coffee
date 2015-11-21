@@ -66,13 +66,12 @@ module.exports = (app, passport) ->
 		MongoClient.connect mongoDBUrl, (err, db) ->
 			diseases = db.collection 'diseases'
 
-			((diseases.find {$text : {$search : symptoms}}, {"score" : {$meta : "textScore"}, "text" : 0}).sort {"score" : {$meta : "textScore"}}).toArray((err, docs) ->
+			((diseases.find {$text : {$search : symptoms}}, {"value" : {$meta : "textScore"}, "text" : 0, "_id" : 0}).sort {"value" : {$meta : "textScore"}}).toArray((err, docs) ->
 				assert.equal null, err
 				console.dir(docs)
 				#response = {symptoms: symptoms, result: docs}
 				#res.render "home.jade", {response: JSON.stringify response, null, 4}
 				res.json({symptoms: symptoms, result: docs})
-
 				#NOTE: Can this be optimized?
 				db.close()
 				return
