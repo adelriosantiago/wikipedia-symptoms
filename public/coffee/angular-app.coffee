@@ -9,6 +9,8 @@ app.controller 'exampleCtrl', ($scope, $http) ->
 	console.log 'exampleCtrl'
 	jsonOnly = false
 	$scope.switchLabel = 'Switch to JSON'
+	$scope.jsonDisplay = 'none'
+	$scope.cloudDisplay = 'block'
 	
 	$scope.$watch 'inputCh', (newText) ->
 		#console.log 'inputCh changed ' + newText

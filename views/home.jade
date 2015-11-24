@@ -28,7 +28,9 @@ block content
 					h4 As you write, here are the names of the diseases that match your input:
 					div(class="panel panel-default" style='min-width: 800px;')
 						div.panel-body
-							div#vis(style='min-width: 800px;')
+							pre(style='display: {{jsonDisplay}}')#json
+								{{resultJSON}}
+							div#vis(style='min-width: 800px; display: {{cloudDisplay}}')
 							form#form
 								p(style='position: absolute; right: 0px; top: 0px; display: none;')#status 5/5
 								//div
@@ -63,9 +65,5 @@ block content
 							button(type="button" class="btn btn-default btn-xs right" ng-click="switchData()")
 								span {{switchLabel}}
 							br
-					
-					div
-						pre#json
-							{{resultJSON}}
 					h4 There are 80% chances that the described symptoms are related to:
 						h1 disease
