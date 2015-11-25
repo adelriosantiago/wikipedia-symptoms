@@ -1,31 +1,31 @@
 extends layout
 
 block content
-	div.col-xs-12.common-block
-		div
-			h2 BigDoc disease diagnosis
-			//h4 Bigdoc is a small real-time app that diagnoses diseases based on signs and symptoms. With this small program you can diagnose... Read my blog post explaining how it works at... Bear mind that this symptom diagnoser is highly experimental, do *never* use this to self- medicate and/or avoid visiting a real doctor. By using this app you agree that...
-		div.row.margin-top-50
-			div.col-xs-10.col-xs-offset-1
-				div(ng-controller="exampleCtrl")
-					h4 Write down your symptoms like if you were speaking to a real doctor or click on a sample to see how it works:
-					//input(type="text" ng-model="inputCh" style='width: 100%; height: 50px')
-					div.row.text-center
-						div.col-xs-4
-							a Common cold
-							//i.fa.fa-home
-						div.col-xs-4
-							a Pneumonia
-						div.col-xs-4
-							a Infection
-					textarea(ng-model="inputCh")#symptoms.margin-top-10
-					//h4 Based on your input, here are a list of some relevant signs and symptoms:
-					pre
-						filter(id='filtered-symptoms')
-					//h4 Bigdoc is now searching for these information on several thousand articles from the internet:
-					//	div
-					//		h1 screen
-					h4 As you write, here are the names of the diseases that match your input:
+	div(ng-controller="exampleCtrl")
+		div.row
+			div.col-xs-12.common-block
+				h2 BigDoc disease diagnosis
+				//h4 Bigdoc is a small real-time app that diagnoses diseases based on signs and symptoms. With this small program you can diagnose... Read my blog post explaining how it works at... Bear mind that this symptom diagnoser is highly experimental, do *never* use this to self- medicate and/or avoid visiting a real doctor. By using this app you agree that...
+		br
+		div.row
+			div.col-xs-3
+				div.row.text-center
+					div.col-xs-4.nopadding
+						a Common cold
+						//i.fa.fa-home
+					div.col-xs-4.nopadding
+						a Pneumonia
+					div.col-xs-4.nopadding
+						a Infection
+				textarea(ng-model="inputCh")#symptoms.margin-top-10
+				h4 Based on your input, here are a list of some relevant signs and symptoms:
+				pre
+					filter(id='filtered-symptoms')
+				//h4 Bigdoc is now searching for these information on several thousand articles from the internet:
+				//	div
+				//		h1 screen
+			div.col-xs-9
+				h4 As you write, here are the names of the diseases that match your input:
 					div(class="panel panel-default" style='min-width: 800px;')
 						div.panel-body
 							pre(style='display: {{jsonDisplay}}')#json
@@ -67,3 +67,4 @@ block content
 							br
 					h4 There are 80% chances that the described symptoms are related to:
 						h1 disease
+
