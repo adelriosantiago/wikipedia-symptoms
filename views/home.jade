@@ -35,36 +35,37 @@ block content
 								p(style='position: absolute; right: 0px; top: 0px; display: none;')#status 5/5
 								//div
 								//	textarea#sympt [{"key":"abc","value":3},{"key":"cde","value":2},{"key":"zxc","value":1}]
-								div
-									p
-										label Spiral:
-										label(for='archimedean')
-											input(name="spiral" id="archimedean" value="archimedean" checked="checked" type="radio")
-											Archimedean
-										label(for='rectangular')
-											input(name="spiral" id="rectangular" value="rectangular" type="radio")
-											Rectangular
-									p
-										label Scale:
-										label(for='scale-log')
-											input(name="scale" id="scale-log" value="log" checked="checked" type="radio")
-											log n
-										label(for='scale-sqrt')
-											input(name="scale" id="scale-sqrt" value="sqrt" type="radio")
-											√n
-										label(for='scale-linear')
-											input(name="scale" id="scale-linear" value="linear" type="radio")
-											n
-									p
-										label Font:
-											input(id="font" value="Impact" type="text")
-									p
-										label(for='max') Number of words:
-											input(id="max" value="250" min="1" type="number")
+								
 						div.panel-footer
 							button(type="button" class="btn btn-default btn-xs right" ng-click="switchData()")
 								span {{switchLabel}}
 							br
+							div
+								p
+									label Spiral:
+									label(for='archimedean')
+										input(name="spiral" id="archimedean" value="archimedean" checked="checked" type="radio")
+										Archimedean
+									label(for='rectangular')
+										input(name="spiral" id="rectangular" value="rectangular" type="radio")
+										Rectangular
+								p
+									label Scale:
+									label(for='scale-log')
+										input(name="scale" id="scale-log" value="log" checked="checked" type="radio")
+										log n
+									label(for='scale-sqrt')
+										input(name="scale" id="scale-sqrt" value="sqrt" type="radio")
+										√n
+									label(for='scale-linear')
+										input(name="scale" id="scale-linear" value="linear" type="radio")
+										n
+								p
+									label Font:
+										input(id="font" value="Impact" type="text")
+								p
+									label(for='max') Number of words:
+										input(id="max" value="250" min="1" type="number")
 					h4 There are 80% chances that the described symptoms are related to:
 						h1 disease
 
