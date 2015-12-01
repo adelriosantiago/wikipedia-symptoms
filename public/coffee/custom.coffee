@@ -23,10 +23,6 @@ $ ->
 		
 		$("#filtered-symptoms").html filtered.join ','
 	
-	#debouncedFunction = _.debounce(() ->
-	#	alert 'test'
-	#, 1000)
-	#$("#symptoms").keyup((ev) -> alert 'test')
 	
 	$("#symptoms").keyup((ev) -> filter_diseases())
 	

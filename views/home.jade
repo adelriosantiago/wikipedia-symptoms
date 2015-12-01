@@ -9,7 +9,8 @@ block content
 		br
 		div.row
 			div.col-xs-3
-				div.row.text-center
+				h4 Write your symptoms here as if you were talking to a doctor
+				div.row.text-center(style='display: none;')
 					div.col-xs-4.nopadding
 						a Common cold
 						//i.fa.fa-home
@@ -26,7 +27,7 @@ block content
 				//		h1 screen
 			div.col-xs-9
 				h4 As you write, here are the names of the diseases that match your input:
-					div(class="panel panel-default" style='min-width: 800px;')
+					div(class="panel panel-default margin-top-10" style='min-width: 800px;')
 						div.panel-body
 							pre(style='display: {{jsonDisplay}}')#json
 								{{resultJSON}}
@@ -40,7 +41,7 @@ block content
 							button(type="button" class="btn btn-default btn-xs right" ng-click="switchData()")
 								span {{switchLabel}}
 							br
-							div
+							div(style='display: none;') //TODO: Enable this section
 								p
 									label Spiral:
 									label(for='archimedean')
@@ -66,6 +67,6 @@ block content
 								p
 									label(for='max') Number of words:
 										input(id="max" value="250" min="1" type="number")
-					h4 There are 80% chances that the described symptoms are related to:
-						h1 disease
+					//h4 There are 80% chances that the described symptoms are related to:
+						//h1 disease
 
