@@ -4,10 +4,10 @@ readline = require('linebyline')
 Wiki = require('wikijs')
 MongoClient = require('mongodb').MongoClient;
 assert = require('assert')
+#_ = require('underscore') #Not used actually
 
 console.log "Started"
 mongoDBUrl = 'mongodb://localhost:27017/bigdoc';
-
 
 ###
 articles = []

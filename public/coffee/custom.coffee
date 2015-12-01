@@ -23,9 +23,13 @@ $ ->
 		
 		$("#filtered-symptoms").html filtered.join ','
 	
+	#debouncedFunction = _.debounce(() ->
+	#	alert 'test'
+	#, 1000)
+	#$("#symptoms").keyup((ev) -> alert 'test')
+	
 	$("#symptoms").keyup((ev) -> filter_diseases())
 	
-	#$("#texti").val("")
 	
 	#The D3 wordcloud
 	fill = d3.scale.category20();
