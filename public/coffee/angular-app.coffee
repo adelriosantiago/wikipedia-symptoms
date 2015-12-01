@@ -16,7 +16,7 @@ app.controller 'exampleCtrl', ($scope, $http) ->
 	$scope.switchLabel = 'Switch to JSON'
 	$scope.jsonDisplay = 'none'
 	$scope.cloudDisplay = 'block'
-	
+
 	$scope.$watch 'inputCh', _.debounce((newText) ->
 		#console.log 'inputCh changed ' + newText
 		($http.get 'api/diagnose?symptoms=' + newText).success((data, status, headers, config) ->
@@ -31,7 +31,7 @@ app.controller 'exampleCtrl', ($scope, $http) ->
 		).error((data, status, headers, config) ->
 			#log error
 		);
-	, 1000)
+	, 500)
 		
 	$scope.switchData = () ->
 		#$scope.quantityResult = calculateService.calculate($scope.quantity, 10);
