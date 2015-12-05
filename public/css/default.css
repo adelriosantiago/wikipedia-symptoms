@@ -1,0 +1,47 @@
+* {
+	word-wrap: break-word;
+}
+
+html {
+	background: white;
+}
+
+/* Custom rules */
+.inline { display: inline-block; }
+.right { float: right; }
+.left { float: left; }
+.nopadding { padding: 0; }
+
+a { margin: 0px 5px; }
+
+.text-center { text-align: center; }
+.margin-top-10 { margin-top: 10px; }
+.margin-top-30 { margin-top: 30px; }
+.margin-top-50 { margin-top: 50px; }
+.margin-top-80 { margin-top: 80px; }
+
+pre {
+	white-space: pre-wrap;       /* css-3 */
+	white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+	white-space: -pre-wrap;      /* Opera 4-6 */
+	white-space: -o-pre-wrap;    /* Opera 7 */	
+	word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+
+common-block {
+	background: gray;
+}
+
+textarea#symptoms {
+	height: 80px;
+	width: 100%;
+	resize: none;
+}
+
+span.connector {
+	color: #bbb;
+}
+
+span.relevant {
+	font-weight: bold;
+}
