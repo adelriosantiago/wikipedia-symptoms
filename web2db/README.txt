@@ -1,0 +1,1 @@
+These subprojects fill the Mongo DB with disease information from the Wikipedia and internet articles.

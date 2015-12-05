@@ -1,0 +1,6 @@
+{
+   "disease" : {
+      "name" : "common flu",
+      "symptom" : [ "", "" ]
+   }
+}
