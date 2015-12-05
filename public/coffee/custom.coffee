@@ -23,9 +23,7 @@ $ ->
 		
 		$("#filtered-symptoms").html filtered.join ','
 	
-	
 	$("#symptoms").keyup((ev) -> filter_diseases())
-	
 	
 	#The D3 wordcloud
 	fill = d3.scale.category20();
