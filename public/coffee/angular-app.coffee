@@ -25,7 +25,8 @@ app.controller 'exampleCtrl', ($scope, $http) ->
 			window.wordsMatch = data.diseases
 			#console.log window.wordsMatch
 			generate()
-			$scope.resultJSON = data
+			$scope.resultJSON = JSON.stringify(data, null, 4)
+			console.log data
 			#var tags = JSON.parse data.diseases
 		).error((data, status, headers, config) ->
 			#log error
@@ -37,14 +38,14 @@ app.controller 'exampleCtrl', ($scope, $http) ->
 		jsonOnly = !jsonOnly
 		
 		if jsonOnly
-			$scope.switchLabel = 'Switch to JSON'
+			$scope.switchLabel = 'Switch to Word Cloud'
 			#Enable JSON
 			$scope.jsonDisplay = 'block'
 			$scope.cloudDisplay = 'none'
-			refreshRate = 10
+			refreshRate = 100
 			
 		else
-			$scope.switchLabel = 'Switch to Word Cloud'
+			$scope.switchLabel = 'Switch to JSON'
 			#Enable Word Cloud
 			$scope.jsonDisplay = 'none'
 			$scope.cloudDisplay = 'block'

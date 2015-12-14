@@ -22,18 +22,19 @@
       return ($http.get('api/diagnose?symptoms=' + newText)).success(function(data, status, headers, config) {
         window.wordsMatch = data.diseases;
         generate();
-        return $scope.resultJSON = data;
+        $scope.resultJSON = JSON.stringify(data, null, 4);
+        return console.log(data);
       }).error(function(data, status, headers, config) {});
     }, refreshRate));
     $scope.switchData = function() {
       jsonOnly = !jsonOnly;
       if (jsonOnly) {
-        $scope.switchLabel = 'Switch to JSON';
+        $scope.switchLabel = 'Switch to Word Cloud';
         $scope.jsonDisplay = 'block';
         $scope.cloudDisplay = 'none';
-        refreshRate = 10;
+        refreshRate = 100;
       } else {
-        $scope.switchLabel = 'Switch to Word Cloud';
+        $scope.switchLabel = 'Switch to JSON';
         $scope.jsonDisplay = 'none';
         $scope.cloudDisplay = 'block';
         refreshRate = 500;

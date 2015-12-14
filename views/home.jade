@@ -19,7 +19,7 @@ block content
 					div.col-xs-4.nopadding
 						a GERD
 				textarea(ng-model="inputCh")#symptoms.margin-top-10
-				h4 Based on your input, here are a list of some relevant signs and symptoms:
+				h4 Based on your input, here is a list of some relevant signs and symptoms:
 				pre
 					filter(id='filtered-symptoms')
 				//h4 Bigdoc is now searching for these information on several thousand articles from the internet:
@@ -29,7 +29,7 @@ block content
 				h4 As you write, here are the names of the diseases that match your input:
 					div(class="panel panel-default margin-top-10" style='min-width: 800px;')
 						div.panel-body
-							pre(style='display: {{jsonDisplay}}')#json
+							pre#json(style='display: {{jsonDisplay}}')
 								{{resultJSON}}
 							div#vis(style='min-width: 800px; display: {{cloudDisplay}}')
 							form#form
@@ -63,7 +63,7 @@ block content
 										input(id="font" value="Impact" type="text")
 								p
 									label(for='max') Number of words:
-										input(id="max" value="250" min="1" type="number")
+										input(id="max" value="10" min="1" type="number")
 					//h4 There are 80% chances that the described symptoms are related to:
 						//h1 disease
 

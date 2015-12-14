@@ -6,6 +6,10 @@ html {
 	background: white;
 }
 
+p, h1, h2, h3, h4, h5, h6 {
+	font-family: 'Rambla', sans-serif;
+}
+
 /* Custom rules */
 .inline { display: inline-block; }
 .right { float: right; }
