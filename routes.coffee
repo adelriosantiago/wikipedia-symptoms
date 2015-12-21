@@ -69,12 +69,28 @@ module.exports = (app, passport) ->
 			diseases = db.collection 'diseases'
 			diseases.aggregate([
 				{$match: {$text: {$search: symptoms}}},
-				{$project: {"_id" : 0, "key" : "$_id", value: {$multiply : [{ $meta: "textScore" }, 10]}}},
+				#{$project: {"_id" : 0, "key" : "$_id", value: {$multiply : [{ $meta: "textScore" }, 10]}}}, #Old version, no longer used
+				{$project: {"_id" : 0, "key" : "$_id", value: { $meta: "textScore" }}},
 				{$sort: {score: {$meta: "textScore" }}},
 				{$limit: limit}
 			]).toArray((err, docs) ->
 				assert.equal err, null
 				console.log docs
+				
+				#Fix sizes
+				dMax = docs[0].value
+				dMin = docs[docs.length - 1].value
+				dDiff = dMax - dMin
+				dFactor = 1 / dDiff
+				
+				#For each value
+				#New value = (current - dMin) * dFactor
+				
+				console.log dMax
+				console.log dMin
+				console.log dDiff
+				console.log dFactor
+				
 				res.json {diseases: docs, symptoms: symptoms}
 				db.close()
 				return
