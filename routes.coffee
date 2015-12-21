@@ -61,6 +61,8 @@ module.exports = (app, passport) ->
 		#TODO: Sanitize query.symptoms entry
 
 		symptoms = req.query.symptoms
+		limit = req.query.limit #TODO: Convert to int and erase the next line
+		limit = 10 #Hardcoded limit
 
 		#TODO: Perform the DB text search
 		MongoClient.connect mongoDBUrl, (err, db) ->
@@ -68,7 +70,8 @@ module.exports = (app, passport) ->
 			diseases.aggregate([
 				{$match: {$text: {$search: symptoms}}},
 				{$project: {"_id" : 0, "key" : "$_id", value: {$multiply : [{ $meta: "textScore" }, 10]}}},
-				{$sort: {score: {$meta: "textScore" }}}
+				{$sort: {score: {$meta: "textScore" }}},
+				{$limit: limit}
 			]).toArray((err, docs) ->
 				assert.equal err, null
 				console.log docs

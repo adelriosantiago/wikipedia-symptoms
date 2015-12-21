@@ -33,7 +33,7 @@
       return filter_diseases();
     });
     fill = d3.scale.category20();
-    window.thecloud = d3.layout.cloud().size([300, 300]).words([".NET", "Silverlight", "jQueryx", "CSS3", "HTML5", "JavaScript", "SQL", "C#"].map(function(d) {
+    window.thecloud = d3.layout.cloud().size([300, 300]).words([".NET", "Silverlight", "jQuery", "CSS3", "HTML5", "JavaScript", "SQL", "C#"].map(function(d) {
       return {
         text: d,
         size: 10 + Math.random() * 50
