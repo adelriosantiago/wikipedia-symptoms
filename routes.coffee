@@ -86,10 +86,11 @@ module.exports = (app, passport) ->
 				#For each value
 				#New value = (current - dMin) * dFactor
 				
-				console.log dMax
-				console.log dMin
-				console.log dDiff
-				console.log dFactor
+				docs.forEach (item) ->
+					console.log item.value
+					item.value = (item.value - dMin) * dFactor #Convert to 0 to 1 scale
+					item.value = item.value + 0.3 #Avoid 0 size words
+					item.value = item.value * 10 #Scale words for the word cloud
 				
 				res.json {diseases: docs, symptoms: symptoms}
 				db.close()
