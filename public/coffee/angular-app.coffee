@@ -29,7 +29,7 @@ app.controller 'exampleCtrl', ($scope, $http) ->
 			console.log data
 			#var tags = JSON.parse data.diseases
 		).error((data, status, headers, config) ->
-			#log error
+			#Log error
 		);
 	, refreshRate)
 		
