@@ -16,7 +16,7 @@
     "cluster": "*",
     "coffee-script": "1.9.0",
     "connect-flash": "*",
-    "connect-mongo": "*",
+    "connect-mongo": "1.0.0",
     "connect-timeout": "*",
     "cookie-parser": "*",
     "crypto": "*",
