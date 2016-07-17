@@ -7,17 +7,7 @@ var Wiki = require('wikijs'),
 var data = {},
 	wiki = new Wiki();
 
-wiki.page('Kane').then(function(page) {
-	page.content().then(function(info) {
-		data = info;
-		console.log(data); //Bruce Wayne
-		res.render('index', { title: 'Express', data: data});
-	});
-});
-
-/*
-//All the diseases
-var articles = [];
+var articles = []; //Array with disease names to fetch
 
 var rl = readline('./bulk.txt');
 rl.on('line', function(line, lineCount, byteCount) {
@@ -63,4 +53,4 @@ MongoClient.connect(url, function(err, db) {
             });
         });
     });
-});*/
+});

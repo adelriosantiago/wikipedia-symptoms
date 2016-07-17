@@ -13,5 +13,3 @@ wiki.page('Kane').then(function(page) {
 		console.log('Wikipedia fetch test finished');
 	});
 });
-
-
