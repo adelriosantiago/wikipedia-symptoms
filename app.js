@@ -72,13 +72,6 @@ if (cluster.isMaster) {
   app.use(methodOverride());
   require('./extras/middleware')(app);
   var routes = require('./routes')(app, passport);
-  app.use(require('node-sass-middleware')({
-    root: path.join(__dirname, 'public'),
-    src: 'scss',
-    dest: 'css',
-    outputStyle: 'compressed',
-    prefix: '/css'
-  }));
   app.use(static_dir(path.join(__dirname, 'public')));
 
 
