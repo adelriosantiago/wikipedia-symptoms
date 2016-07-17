@@ -53,4 +53,11 @@ MongoClient.connect(url, function(err, db) {
             });
         });
     });
+    
+    //Create index for text
+    var collection = db.collection('diseases');
+    collection.createIndex({ text : "text" }, function(err, result) {
+		console.log(result);
+		console.log('Index created');
+	});
 });

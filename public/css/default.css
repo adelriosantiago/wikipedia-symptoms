@@ -6,6 +6,14 @@ html {
 	background: white;
 }
 
+/*@font-face {
+  font-family: 'Rambla';
+  src: url('/fonts/Rambla-Bold.ttf')  format('truetype'),
+       url('/fonts/Rambla-BoldItalic.ttf')  format('truetype'),
+       url('/fonts/Rambla-Italic.ttf')  format('truetype'),
+       url('/fonts/Rambla-Regular.ttf')  format('truetype'),
+}*/
+
 p, h1, h2, h3, h4, h5, h6 {
 	font-family: 'Rambla', sans-serif;
 }
