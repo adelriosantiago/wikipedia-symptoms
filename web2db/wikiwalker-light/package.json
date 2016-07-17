@@ -1,0 +1,16 @@
+{
+  "name": "wikiwalker-light",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "debug": "~2.2.0",
+    "linebyline": "^1.0.1",
+    "mongodb": "^2.0.43",
+    "morgan": "~1.6.1",
+    "serve-favicon": "~2.3.0",
+    "wikijs": "^0.1.1"
+  }
+}
