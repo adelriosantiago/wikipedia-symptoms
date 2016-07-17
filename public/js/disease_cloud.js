@@ -273,7 +273,7 @@ $("#sympt").keyup(function(ev) {
 	console.log('key');
 	wordsMatch = d3.select("#sympt").property("value");
 	wordsMatch = JSON.parse(wordsMatch);
-	console.dir(wordsMatch);
+	//console.dir(wordsMatch);
 	generate();
 });
 

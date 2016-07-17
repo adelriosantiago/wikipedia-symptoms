@@ -23,7 +23,7 @@
         window.wordsMatch = data.diseases;
         generate();
         $scope.resultJSON = JSON.stringify(data, null, 4);
-        return console.log(data);
+        return;
       }).error(function(data, status, headers, config) {});
     }, refreshRate));
     $scope.switchData = function() {
