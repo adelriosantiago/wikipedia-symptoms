@@ -1,9 +1,3 @@
-/**
-* The Core of our app...!
-* MEAN Boilerplate by @Jmlevick <https://twitter.com/Jmlevick>
-* License: Coffeeware <https://github.com/Jmlevick/coffeeware-license>
-*/
-
 'use strict'
 
 // Module Dependencies
