@@ -107,8 +107,8 @@ module.exports = (app, passport) ->
         res.json "{db_status:null, db_entries:null}"
 
     #Original information page
-    app.get "/info", (req, res) ->
-        res.render "info.jade"
+    app.get "/boilerplate-info", (req, res) ->
+        res.render "boilerplate-info.jade"
 
     #Imports
     require('./entities/users/controller')(app)
