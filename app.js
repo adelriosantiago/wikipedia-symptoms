@@ -38,7 +38,7 @@ if (cluster.isMaster) {
 } else {
 
   var app = express();
-  var port = 3000;
+  var port = 4040;
   var server = app.listen(port);
 
   // Extras
