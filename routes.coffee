@@ -66,13 +66,9 @@ module.exports = (app, passport) ->
 
         #TODO: Perform the DB text search
         MongoClient.connect mongoDBUrl, (err, db) ->
-        
             if err
-                console.log "---ERROR---"
+                console.log "Error"
                 console.log err
-        
-            console.log db.collection
-            console.log "--- NO ERROR---"
         
             diseases = db.collection 'diseases'
             diseases.aggregate([
