@@ -104,6 +104,11 @@ module.exports = (app, passport) ->
     #Bigdoc API get info
     app.get "/api/info", (req, res) ->
         res.json "{db_status:null, db_entries:null}"
+     
+    #TO-DO: Uncomment when we have no more mistakes loading resources (these resources reach this route)
+    ##All else (this route *must* be last on this file!)
+    #app.get "*", (req, res) ->
+    #    res.redirect "/"
 
     #Imports
     require('./entities/users/controller')(app)
