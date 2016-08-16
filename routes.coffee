@@ -101,14 +101,9 @@ module.exports = (app, passport) ->
                 return
             );
 
-
     #Bigdoc API get info
     app.get "/api/info", (req, res) ->
         res.json "{db_status:null, db_entries:null}"
-
-    #Original information page
-    app.get "/boilerplate-info", (req, res) ->
-        res.render "boilerplate-info.jade"
 
     #Imports
     require('./entities/users/controller')(app)
