@@ -206,11 +206,14 @@ var fill = d3.scale.category20b(),
 	w = 800,
 	h = 600,
 	words = [],
-	max, scale = 1,
+	max, 
+    scale = 1,
 	complete = 0,
 	keyword = "",
-	fontSize, maxLength = 100,
-	fetcher, statusText = d3.select("#status"),
+	fontSize, 
+    maxLength = 100,
+	fetcher, 
+    statusText = d3.select("#status"),
 	layout = d3.layout.cloud().timeInterval(10).size([w, h]).fontSize(function(t) {
 		return fontSize(+t.value)
 	}).text(function(t) {
@@ -238,6 +241,7 @@ function generate() {
 function progress() {
 	statusText.text(++complete + "/" + max)
 }
+
 function draw(t, e) {
 	statusText.style("display", "none");
 	scale = e ? Math.min(w / Math.abs(e[1].x - w / 2), w / Math.abs(e[0].x - w / 2), h / Math.abs(e[1].y - h / 2), h / Math.abs(e[0].y - h / 2)) / 2 : 1;
@@ -256,16 +260,30 @@ function draw(t, e) {
 	}), n.style("font-family", function(t) {
 		return t.font
 	}).style("fill", function(t) {
-		return fill(t.text.toLowerCase())
+        return fill(t.text.toLowerCase())
+        //return "red"; //TO-DO: Implement red coloring on top values
 	}).text(function(t) {
 		return t.text
 	});
-	var a = background.append("g").attr("transform", vis.attr("transform")),
+	
+    var a = background.append("g").attr("transform", vis.attr("transform")),
 		r = a.node();
+        
 	n.exit().each(function() {
 		r.appendChild(this)
 	})
-	a.transition().duration(1e3).style("opacity", 1e-6).remove(), vis.transition().delay(1e3).duration(750).attr("transform", "translate(" + [w >> 1, h >> 1] + ")scale(" + scale + ")")
+    
+	a.transition().duration(1e3).style("opacity", 1e-6).remove(),
+    vis.transition()
+        .delay(1e3)
+        .duration(750)
+        .attr("transform", "translate(" + [w >> 1, h >> 1] + ")scale(" + scale + ")")
+        .each("end", _.once(function() {
+            console.log("end");
+            //TODO: Remove top coloring
+        }));
+    
+    console.log("test");
 }
 
 //Event listeners
