@@ -261,7 +261,7 @@ function draw(t, e) {
         return t.font
     }).style("fill", function(t) {
         return fill(t.text.toLowerCase())
-        //return "red"; //TO-DO: Implement red coloring on top values
+        //return "red"; //This would make all words red initially
     }).text(function(t) {
         return t.text
     });
@@ -275,12 +275,15 @@ function draw(t, e) {
     
     a.transition().duration(1e3).style("opacity", 1e-6).remove(),
     vis.transition()
-        .delay(1e3)
-        .duration(750)
+        .duration(1e3)
         .attr("transform", "translate(" + [w >> 1, h >> 1] + ")scale(" + scale + ")")
         .each("end", _.once(function() {
             console.log("end");
             //TODO: Remove top coloring
+            n.transition().duration(5e3).style("fill", function(t) {
+                //return fill(t.text.toLowerCase()) //This would make all words randomly colorful
+                return "blue"; //TO-DO: Implement red coloring on top values
+            })
         }));
     
     console.log("test");
