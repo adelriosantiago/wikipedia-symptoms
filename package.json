@@ -4,11 +4,7 @@
   "private": true,
   "scripts": {
     "start": "nodemon app.js --watch routes.coffee",
-    "jscoffee": "cd public && coffeebar -o js/ -mw coffee/",
-    "coffeejs": "cd public && coffee -o js/ -cw coffee/",
-    "smushimg": "cd public && smushit -R -- img/",
-    "createadmin": "cd config && coffee createadmin.coffee",
-    "scaffold": "cd config && coffee scaffold.coffee"
+    "coffeejs": "cd public && coffee -o js/ -cw coffee/"
   },
   "dependencies": {
     "bcrypt": "*",
