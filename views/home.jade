@@ -25,6 +25,10 @@ block content
                 //h4 Bigdoc is now searching for these information on several thousand articles from the internet:
                 //    div
                 //        h1 screen
+                p
+                    label(for='max') Number of words:
+                        input(id="max" value="15" min="1" type="number")
+                    input(id="ex1" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="14")
             div.col-xs-9
                 h4 As you write, here are the names of the diseases that match your input:
                     div(class="panel panel-default margin-top-10" style='min-width: 800px;')
@@ -39,10 +43,7 @@ block content
                             form#form
                                 p(style='position: absolute; right: 0px; top: 0px; display: none;')#status 5/5
                         div.panel-footer(style='display: none;')
-                            button(type="button" class="btn btn-default btn-xs right" ng-click="switchData()")
-                                span {{switchLabel}}
-                            br
-                            div //TODO: Enable this section
+                            div
                                 p
                                     label Spiral:
                                     label(for='archimedean')
@@ -65,8 +66,5 @@ block content
                                 p
                                     label Font:
                                         input(id="font" value="Impact" type="text")
-                                p
-                                    label(for='max') Number of words:
-                                        input(id="max" value="10" min="1" type="number")
                     //h4 There are 80% chances that the described symptoms are related to:
                         //h1 disease
