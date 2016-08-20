@@ -294,15 +294,6 @@ function draw(t, e) {
     console.log("test");
 }
 
-//Event listeners
-$("#sympt").keyup(function(ev) {
-    console.log('key');
-    wordsMatch = d3.select("#sympt").property("value");
-    wordsMatch = JSON.parse(wordsMatch);
-    //console.dir(wordsMatch);
-    generate();
-});
-
 $('input[type=radio], #font, #max').change(function () {
     generate();
 });
