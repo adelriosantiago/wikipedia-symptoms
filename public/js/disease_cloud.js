@@ -282,7 +282,12 @@ function draw(t, e) {
             //TODO: Remove top coloring
             n.transition().duration(5e3).style("fill", function(t) {
                 //return fill(t.text.toLowerCase()) //This would make all words randomly colorful
-                return "blue"; //TO-DO: Implement red coloring on top values
+                console.log(t);
+                if (t.size > 45) {
+                    return "rgb(" + t.size * 5 + ", 0, 0)";
+                } else {
+                    return "rgb(" + (255 - (t.size * 5)) + ", " + (255 - (t.size * 5)) + ", 255)";
+                }
             })
         }));
     
