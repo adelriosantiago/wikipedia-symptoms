@@ -25,10 +25,14 @@ block content
                 //h4 Bigdoc is now searching for these information on several thousand articles from the internet:
                 //    div
                 //        h1 screen
-                p
-                    label(for='max') Number of words:
-                        input(id="max" value="15" min="1" type="number")
-                    input(id="ex1" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="14")
+                div.row
+                    div.col-xs-6
+                        p
+                            label(for='max') Results:
+                                input(id="max" value="15" min="1" type="number")
+                    div.col-xs-6
+                        p
+                            input(id="ex1" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="14" style='display: none;')
             div.col-xs-9
                 h4 As you write, here are the names of the diseases that match your input:
                     div(class="panel panel-default margin-top-10" style='min-width: 800px;')

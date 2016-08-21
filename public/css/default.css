@@ -50,6 +50,11 @@ textarea#symptoms {
 	resize: none;
 }
 
+#max {
+    width: 40px;
+    margin: 0px 5px;
+}
+
 span.connector {
 	color: #bbb;
 }
