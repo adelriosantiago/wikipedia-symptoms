@@ -1,6 +1,6 @@
 {
-  "name": "meanBoilerplate",
-  "version": "4.0.0",
+  "name": "bigdoc-machine",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "start": "nodemon app.js --watch routes.coffee",
@@ -11,9 +11,7 @@
     "body-parser": "*",
     "cluster": "*",
     "coffee-script": "1.9.0",
-    "connect-flash": "*",
-    "connect-mongo": "1.0.0",
-    "connect-timeout": "*",
+    "connect-flash": "^0.1.1",
     "cookie-parser": "*",
     "crypto": "*",
     "errorhandler": "*",
@@ -24,21 +22,16 @@
     "linebyline": "^1.0.1",
     "method-override": "*",
     "mongodb": "^2.0.43",
-    "mongoose": "4.x",
     "morgan": "*",
     "node-sass-middleware": "*",
-    "passport": "*",
-    "passport-local": "*",
     "serve-favicon": "*",
     "serve-static": "*",
     "underscore": "^1.8.3",
-    "wikijs": "^0.1.1",
-    "yaml-config": "*"
+    "wikijs": "^0.1.1"
   },
   "devDependencies": {
     "nodemon": "*",
     "coffeebar": "*",
-    "node-smushit": "*",
     "fs": "*",
     "fs-extra": "*",
     "replace": "*"
