@@ -109,6 +109,3 @@ module.exports = (app, passport) ->
     ##All else (this route *must* be last on this file!)
     #app.get "*", (req, res) ->
     #    res.redirect "/"
-
-    #Imports
-    require('./entities/users/controller')(app)

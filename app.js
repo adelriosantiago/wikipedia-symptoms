@@ -1,6 +1,6 @@
 'use strict'
 
-// Module Dependencies
+//Module Dependencies
 require('coffee-script');
 require('coffee-script/register');
 
@@ -22,10 +22,6 @@ var timeout = require('connect-timeout');
 var flash = require('connect-flash');
 var device = require('express-device');
 
-// YAML Loading
-var config = require('yaml-config');
-var settings = config.readConfig('config/app.yaml');
-
 // The application
 if (cluster.isMaster) {
   var cpuCount, i = undefined;
@@ -41,14 +37,7 @@ if (cluster.isMaster) {
   var port = 4040;
   var server = app.listen(port);
 
-  // Extras
-  // Passport Logic
-  var passport = require('passport')
-  , LocalStrategy = require('passport-local').Strategy;
-  var User = require('./entities/users/model');
-  require('./extras/passport')(passport, LocalStrategy, User);
-
-  // all environments
+  //All environments
   app.set('views', path.join(__dirname, 'views'));
   app.set('view engine', 'jade');
   app.use(favicon(path.join(__dirname, 'public/favicon.ico')));
@@ -59,21 +48,16 @@ if (cluster.isMaster) {
   app.use(bodyParser.urlencoded({extended: true}));
 
   app.use(session({
-      secret: settings.sessions_secret,
+      secret: 'secret_session',
       cookie: { maxAge: 24 * 60 * 60, expires: null },
       saveUninitialized: true,
-      resave: true,
-      store: new MongoStore({url: settings.mongodb_uri + "/sessions"})
+      resave: true
     }));
 
-  app.use(passport.initialize());
-  app.use(passport.session());
   app.use(flash());
   app.use(methodOverride());
-  require('./extras/middleware')(app);
-  var routes = require('./routes')(app, passport);
+  var routes = require('./routes')(app);
   app.use(static_dir(path.join(__dirname, 'public')));
-
 
   // Error Handling (Uncomment in production!)
   // 404

@@ -6,11 +6,13 @@ window.drawfunc = null;
 window.wordsMatch = null;
 
 $ ->
+    ###
     #TODO: Implement word quantity by slider
     $('#cloudCount').slider {
         formatter : (value) ->
             return "abc: " + value
         }
+    ###
     
     connectorStr = ['the', 'and', 'or']
     relevantStr = ['pain', 'coughing', 'sneezing']
