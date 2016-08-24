@@ -4,7 +4,7 @@ readline = require('linebyline')
 Wiki = require('wikijs')
 MongoClient = require('mongodb').MongoClient;
 assert = require('assert')
-#_ = require('underscore') #Not used actually
+_ = require('lodash')
 
 console.log "Started"
 mongoDBUrl = 'mongodb://localhost:27017/bigdoc';
@@ -57,6 +57,20 @@ module.exports = (app, passport) ->
         res.render "home.jade"
 
     #Bigdoc API get diagnose
+    app.get "/recalculate-sizes", (req, res) ->
+        MongoClient.connect mongoDBUrl, (err, db) ->
+            if err
+                console.log "Error"
+                console.log err
+            
+            
+            
+            res.json {status: "Done"}
+            db.close()
+            return
+        
+    
+    #Bigdoc API get diagnose
     app.get "/api/diagnose", (req, res) ->
         #TODO: Sanitize query.symptoms entry
 
@@ -64,7 +78,6 @@ module.exports = (app, passport) ->
         limit = req.query.limit #TODO: Convert to int and erase the next line
         limit = 15 #Hardcoded limit
 
-        #TODO: Perform the DB text search
         MongoClient.connect mongoDBUrl, (err, db) ->
             if err
                 console.log "Error"
@@ -79,22 +92,24 @@ module.exports = (app, passport) ->
                 {$limit: limit}
             ]).toArray((err, docs) ->
                 assert.equal err, null
-                console.log docs
+                console.log "DOC:" + JSON.stringify docs
                 
-                #Fix sizes
+                #Make scores go from 0.0 to 1.0
                 dMax = docs[0].value
                 dMin = docs[docs.length - 1].value
                 dDiff = dMax - dMin
                 dFactor = 1 / dDiff
-
-                #For each value
-                #New value = (current - dMin) * dFactor
-
+                #TODO: Fix scores in accordance to text quantity
+                
+                
+                #Draw words for each value
                 docs.forEach (item) ->
                     console.log item.value
                     item.value = (item.value - dMin) * dFactor #Convert to 0 to 1 scale
                     item.value = item.value + 0.3 #Avoid 0 size words
                     item.value = item.value * 10 #Scale words for the word cloud
+                    
+                
 
                 res.json {diseases: docs, symptoms: symptoms}
                 db.close()

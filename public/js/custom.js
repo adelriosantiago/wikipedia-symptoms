@@ -9,12 +9,15 @@
   window.wordsMatch = null;
 
   $(function() {
+
+    /*
+    #TODO: Implement word quantity by slider
+    $('#cloudCount').slider {
+        formatter : (value) ->
+            return "abc: " + value
+        }
+     */
     var connectorStr, fill, filter_diseases, relevantStr;
-    $('#cloudCount').slider({
-      formatter: function(value) {
-        return "abc: " + value;
-      }
-    });
     connectorStr = ['the', 'and', 'or'];
     relevantStr = ['pain', 'coughing', 'sneezing'];
     (filter_diseases = function() {
