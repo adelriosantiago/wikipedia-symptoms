@@ -9,46 +9,6 @@ _ = require('lodash')
 console.log "Started"
 mongoDBUrl = 'mongodb://localhost:27017/bigdoc';
 
-###
-articles = []
-rl = readline('./bulk.txt')
-rl.on "line", (line, lineCount, byteCount) ->
-    articles.push(line)
-    return
-rl.on "error", (e) ->
-	console.log("Error reading file")
-
-rl.on "end", (e) ->
-	console.log("End reading file")
-
-MongoClient.connect mongoDBUrl, (err, db) ->
-	assert.equal null, err
-	console.log "Connected to the server"
-	
-	wiki = new Wiki();
-
-	articles.forEach (item) ->
-		name = item.substr((item.lastIndexOf '/') + 1, item.length).replace '_', ' '
-		console.log "Wikiing: " + name
-		
-		(wiki.page name).then (page) ->
-			page.content().then (text) ->
-				dbEntry = {"_id" : name, "text" : text}
-				console.log dbEntry.name
-		
-				#Insert the entry on the DB
-				diseases = db.collection 'diseases'
-				console.log "About to insert: " + name
-				
-				diseases.insert dbEntry, (err, result) ->
-					return console.log err if err
-					
-					#TODO: Close db
-					console.log "Inserted: " + name + " with result ", result
-		
-		console.log "End"
-###
-
 #Routes
 module.exports = (app, passport) ->
 
@@ -57,18 +17,22 @@ module.exports = (app, passport) ->
         res.render "home.jade"
 
     #Bigdoc API get diagnose
-    app.get "/recalculate-sizes", (req, res) ->
+    app.get "/", (req, res) ->
         MongoClient.connect mongoDBUrl, (err, db) ->
             if err
                 console.log "Error"
                 console.log err
             
-            
-            
-            res.json {status: "Done"}
-            db.close()
-            return
-        
+            (db.collection 'diseases').find({}).toArray((err, docs) ->
+                assert.equal err, null
+                
+                _.each docs, (el) ->
+                    console.log "DOC:" + el.text.length
+                
+                res.json {status: "Done", docs: docs}
+                db.close()
+                return
+            );
     
     #Bigdoc API get diagnose
     app.get "/api/diagnose", (req, res) ->
@@ -83,8 +47,7 @@ module.exports = (app, passport) ->
                 console.log "Error"
                 console.log err
         
-            diseases = db.collection 'diseases'
-            diseases.aggregate([
+            (db.collection 'diseases').aggregate([
                 {$match: {$text: {$search: symptoms}}},
                 #{$project: {"_id" : 0, "key" : "$_id", value: {$multiply : [{ $meta: "textScore" }, 10]}}}, #Old version, no longer used
                 {$project: {"_id" : 0, "key" : "$_id", value: { $meta: "textScore" }}},
@@ -120,7 +83,7 @@ module.exports = (app, passport) ->
     app.get "/api/info", (req, res) ->
         res.json "{db_status:null, db_entries:null}"
      
-    #TO-DO: Uncomment when we have no more mistakes loading resources (these resources reach this route)
+    #TO-DO: Uncomment when we have no more missing loading resources (these resources reach this route)
     ##All else (this route *must* be last on this file!)
     #app.get "*", (req, res) ->
     #    res.redirect "/"

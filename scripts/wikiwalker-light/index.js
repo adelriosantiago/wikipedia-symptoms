@@ -21,7 +21,8 @@ rl.on('line', function(line, lineCount, byteCount) {
 
 //Connection URL
 var url = 'mongodb://localhost:27017/bigdoc';
-//Use connect method to connect to the server
+
+
 MongoClient.connect(url, function(err, db) {
     assert.equal(null, err);
     console.log("Connected correctly to server");
@@ -61,3 +62,7 @@ MongoClient.connect(url, function(err, db) {
 		console.log('Index created');
 	});
 });
+
+//TODO: Implement these methods
+//fetchAll()
+//getTextSizes()
