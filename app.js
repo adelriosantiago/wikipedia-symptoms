@@ -46,11 +46,11 @@ if (cluster.isMaster) {
   app.use(bodyParser.urlencoded({extended: true}));
 
   app.use(session({
-      secret: 'secret_session',
-      cookie: { maxAge: 24 * 60 * 60, expires: null },
-      saveUninitialized: true,
-      resave: true
-    }));
+    secret: 'secret_session',
+    cookie: { maxAge: 24 * 60 * 60, expires: null },
+    saveUninitialized: true,
+    resave: true
+  }));
 
   app.use(flash());
   app.use(methodOverride());
