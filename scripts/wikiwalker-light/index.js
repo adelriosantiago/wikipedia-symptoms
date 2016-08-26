@@ -22,7 +22,6 @@ rl.on('line', function(line, lineCount, byteCount) {
 //Connection URL
 var url = 'mongodb://localhost:27017/bigdoc';
 
-
 MongoClient.connect(url, function(err, db) {
     assert.equal(null, err);
     console.log("Connected correctly to server");
@@ -35,20 +34,12 @@ MongoClient.connect(url, function(err, db) {
         
         wiki.page(name).then(function(page) {
             page.content().then(function(text) {
-                var dbEntry = {"_id" : name, "text" : text};
-                console.log(dbEntry);
+                if (text.length == 0) return;
+                var dbEntry = {_id : slugg(name), title: name, text : text};                
                 
-                //Get the documents collection
-                var diseases = db.collection('diseases');            
-                //Insert some documents
-
                 console.log("About to insert " + name);
-
-                diseases.insert(dbEntry, function (err, result) {                
-                    if (err) {
-                        return console.log(err);
-                    }
-
+                (db.collection('diseases')).insert(dbEntry, function (err, result) { //Insert the document
+                    if (err) return console.log(err);
                     console.log("Inserted " + name);
                 });
             });
