@@ -35,6 +35,9 @@ MongoClient.connect(url, function(err, db) {
         wiki.page(name).then(function(page) {
             page.content().then(function(text) {
                 if (text.length == 0) return;
+                
+                //TODO: Add a value { containsSymptoms : true|false } when the text contains "symptoms" or "signs"
+                
                 var dbEntry = {_id : slugg(name), title: name, text : text};                
                 
                 console.log("About to insert " + name);

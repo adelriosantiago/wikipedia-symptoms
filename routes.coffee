@@ -4,6 +4,7 @@ readline = require('linebyline')
 Wiki = require('wikijs')
 MongoClient = require('mongodb').MongoClient;
 assert = require('assert')
+slugg = require('slugg')
 _ = require('lodash')
 
 console.log "Started"
@@ -16,23 +17,28 @@ module.exports = (app, passport) ->
     app.get "/", (req, res) ->
         res.render "home.jade"
 
-    #Bigdoc API get diagnose
-    app.get "/", (req, res) ->
+    #Normalize big data
+    app.get "/purgeData", (req, res) ->
         MongoClient.connect mongoDBUrl, (err, db) ->
             if err
                 console.log "Error"
                 console.log err
             
-            (db.collection 'diseases').find({}).toArray((err, docs) ->
+            (db.collection 'diseases').find({}).toArray (err, docs) ->
                 assert.equal err, null
                 
-                _.each docs, (el) ->
-                    console.log "DOC:" + el.text.length
+                #console.log docs
                 
-                res.json {status: "Done", docs: docs}
-                db.close()
-                return
-            );
+                max = 0
+                min = 0
+                _.each docs, (el) ->                    
+                    (db.collection 'diseases').update { _id : el._id }, { _id : slugg(el._id) }
+                    console.log "slugged " + slugg(el._id)
+                    
+                    #console.log "DOC:" + el.text.length
+                
+                db.close()                
+                return res.json { status: "Done" }
     
     #Bigdoc API get diagnose
     app.get "/api/diagnose", (req, res) ->
@@ -71,8 +77,6 @@ module.exports = (app, passport) ->
                     item.value = (item.value - dMin) * dFactor #Convert to 0 to 1 scale
                     item.value = item.value + 0.3 #Avoid 0 size words
                     item.value = item.value * 10 #Scale words for the word cloud
-                    
-                
 
                 res.json {diseases: docs, symptoms: symptoms}
                 db.close()
