@@ -1,5 +1,4 @@
 # Bigdoc big data symptom analysis by @adelriosantiago
-# MEAN Boilerplate by @Jmlevick <http://jmlevick.me>
 
 window.thecloud = null;
 window.drawfunc = null;

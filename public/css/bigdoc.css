@@ -1,0 +1,90 @@
+/* Debug mode */
+/** {
+  border: 1px solid red;
+}*/
+
+@font-face {
+  font-family: 'Rambla';
+  font-weight: 400;
+  font-style: normal;
+  src: url('/fonts/Rambla-regular/Rambla-regular.eot');
+  src: url('/fonts/Rambla-regular/Rambla-regular.eot?#iefix') format('embedded-opentype'),
+       local('Rambla'),
+       local('Rambla-regular'),
+       url('/fonts/Rambla-regular/Rambla-regular.woff2') format('woff2'),
+       url('/fonts/Rambla-regular/Rambla-regular.woff') format('woff'),
+       url('/fonts/Rambla-regular/Rambla-regular.ttf') format('truetype'),
+       url('/fonts/Rambla-regular/Rambla-regular.svg#Rambla') format('svg');
+}
+
+@font-face {
+  font-family: 'Rambla';
+  font-weight: 700;
+  font-style: normal;
+  src: url('/fonts/Rambla-700/Rambla-700.eot');
+  src: url('/fonts/Rambla-700/Rambla-700.eot?#iefix') format('embedded-opentype'),
+       local('Rambla Bold'),
+       local('Rambla-700'),
+       url('/fonts/Rambla-700/Rambla-700.woff2') format('woff2'),
+       url('/fonts/Rambla-700/Rambla-700.woff') format('woff'),
+       url('/fonts/Rambla-700/Rambla-700.ttf') format('truetype'),
+       url('/fonts/Rambla-700/Rambla-700.svg#Rambla') format('svg');
+}
+
+* {
+	word-wrap: break-word;
+}
+
+html {
+	background: white;
+}
+
+
+p, h1, h2, h3, h4, h5, h6 {
+	font-family: 'Rambla', sans-serif;
+}
+
+/* Custom rules */
+.inline { display: inline-block; }
+.right { float: right; }
+.left { float: left; }
+.nopadding { padding: 0; }
+
+a { margin: 0px 5px; }
+
+.text-center { text-align: center; }
+.margin-top-10 { margin-top: 10px; }
+.margin-top-30 { margin-top: 30px; }
+.margin-top-50 { margin-top: 50px; }
+.margin-top-80 { margin-top: 80px; }
+
+pre {
+	white-space: pre-wrap;       /* css-3 */
+	white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+	white-space: -pre-wrap;      /* Opera 4-6 */
+	white-space: -o-pre-wrap;    /* Opera 7 */
+	word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+
+common-block {
+	background: gray;
+}
+
+textarea#symptoms {
+	height: 80px;
+	width: 100%;
+	resize: none;
+}
+
+#max {
+    width: 40px;
+    margin: 0px 5px;
+}
+
+span.connector {
+	color: #bbb;
+}
+
+span.relevant {
+	font-weight: bold;
+}

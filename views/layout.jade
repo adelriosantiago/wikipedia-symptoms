@@ -3,37 +3,34 @@
 doctype
 html(ng-app='bigdoc-app', lang='en-US')
 head
-    meta(charset='UTF-8')
-    title MEAN Boilerplate: myApp
-    meta(name='description', content='Lorem Ipsum Dolor sit amet')
-    meta(name='keywords', content='foo, bar, baz')
-    meta(http-equiv='X-UA-Compatible', content='IE=edge')
-    meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
-    //if lt IE 9
-        script(src='/bower/bower_components/html5shiv/dist/html5shiv.min.js')
-        script(src='/bower/bower_components/respond/dest/respond.min.js')
-    link(rel='shortcut icon', href='/favicon.ico')
-    link(rel='stylesheet', href='/bootstrap/css/bootstrap.min.css')
-    link(rel='stylesheet', href='/bootstrap/css/bootstrap-theme.min.css')
-    link(rel='stylesheet', href='/bootstrap/css/bootstrap-slider.min.css')
-    link(rel='stylesheet', href='/css/default.css')
-    link(href='https://fonts.googleapis.com/css?family=Rambla:400,400italic,700,700italic' rel='stylesheet' type='text/css')
-    script(src='/js/jquery.min.js')
-    script(src='/js/angular/angular.min.js')
-    script(src='/js/angular/angular-resource.min.js')
+	meta(charset='UTF-8')
+	title BigDoc BigDoc disease diagnosis
+	meta(name='description', content='Lorem Ipsum Dolor sit amet')
+	meta(name='keywords', content='foo, bar, baz')
+	meta(http-equiv='X-UA-Compatible', content='IE=edge')
+	meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
+	//if lt IE 9
+		script(src='/bower/bower_components/html5shiv/dist/html5shiv.min.js')
+		script(src='/bower/bower_components/respond/dest/respond.min.js')
+	link(rel='shortcut icon', href='/favicon.ico')
+	link(rel='stylesheet', href='/bootstrap/css/bootstrap.min.css')
+	link(rel='stylesheet', href='/bootstrap/css/bootstrap-theme.min.css')
+	link(rel='stylesheet', href='/bootstrap/css/bootstrap-slider.min.css')
+	link(rel='stylesheet', href='/plugins/font-awesome/css/font-awesome.min.css')
+	link(rel='stylesheet', href='/css/bigdoc.css')
+	script(src='/js/jquery.min.js')
+	script(src='/js/underscore.js')
+	script(src='/js/angular/angular.min.js')
+	script(src='/js/angular/angular-resource.min.js')
 
-    body
-        div.container
-            div.row
-                block content
+	body
+		div.container
+			div.row
+				block content
 
-    script(src='/js/angular-app.js')
-    script(src='/js/custom.js')
-    script(src='/js/underscore.js')
-    //script(src='/js/d3.js')
-    //script(src='/js/d3.wordcloud.js')
-    script(src='/js/d3v2.js')
-    script(src='/js/disease_cloud.js')
-    script(src='/bootstrap/js/bootstrap.min.js')
-    script(src='/bootstrap/js/bootstrap-slider.min.js')
-    link(rel='stylesheet', href='/packages/font-awesome/css/font-awesome.min.css')
+	script(src='/js/bigdoc-angular.js')
+	script(src='/js/bigdoc-cs.js')
+	script(src='/js/d3.min.js')
+	script(src='/js/d3.wordcloud.js')
+	script(src='/bootstrap/js/bootstrap.min.js')
+	script(src='/bootstrap/js/bootstrap-slider.min.js')
