@@ -29,20 +29,19 @@ block content
 					div.col-xs-6
 						p
 							label(for='max') Results:
-								input(id="max" value="15" min="1" type="number")
+								input#max(value="15" min="1" type="number")
 					div.col-xs-6
 						p
-							input(id="ex1" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="14" style='display: none;')
+							input#ex1(data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="14" style='display: none;')
 			div.col-xs-9
 				h4 As you write, here are the names of the diseases that match your input:
 					div(class="panel panel-default margin-top-10" style='min-width: 800px;')
 						div.panel-heading
-							button(id="dataSwitch" type="button" class="btn btn-default btn-xs right")
-								span(class="label")
+							button#dataSwitch(class="btn btn-default btn-xs right" type="button")
+								span.label
 							br
 						div.panel-body
-							pre#json(style='display: {{jsonDisplay}}')
-								{{resultJSON}}
+							pre#jsonBlock.hidden
 							div#vis(style='min-width: 800px; display: {{cloudDisplay}}')
 							form#form
 								p(style='position: absolute; right: 0px; top: 0px; display: none;')#status 5/5
@@ -51,24 +50,24 @@ block content
 								p
 									label Spiral:
 									label(for='archimedean')
-										input(name="spiral" id="archimedean" value="archimedean" checked="checked" type="radio")
+										input#archimedean(name="spiral" value="archimedean" checked="checked" type="radio")
 										Archimedean
 									label(for='rectangular')
-										input(name="spiral" id="rectangular" value="rectangular" type="radio")
+										input#rectangular(name="spiral" value="rectangular" type="radio")
 										Rectangular
 								p
 									label Scale:
 									label(for='scale-log')
-										input(name="scale" id="scale-log" value="log" checked="checked" type="radio")
+										input#scale-log(name="scale" value="log" checked="checked" type="radio")
 										log n
 									label(for='scale-sqrt')
-										input(name="scale" id="scale-sqrt" value="sqrt" type="radio")
+										input#scale-sqrt(name="scale" value="sqrt" type="radio")
 										√n
 									label(for='scale-linear')
-										input(name="scale" id="scale-linear" value="linear" type="radio")
+										input#scale-linear(name="scale" value="linear" type="radio")
 										n
 								p
 									label Font:
-										input(id="font" value="Impact" type="text")
+										input#font(value="Impact" type="text")
 					//h4 There are 80% chances that the described symptoms are related to:
 						//h1 disease
