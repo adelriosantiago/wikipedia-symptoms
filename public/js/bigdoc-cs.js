@@ -30,7 +30,8 @@
       $.get(callUrl, function(msg) {
         console.log(msg);
         window.wordsMatch = msg.diseases;
-        return generate();
+        generate();
+        return $jsonBlock;
       }).error(function(err) {
         return console.log("Error");
       });

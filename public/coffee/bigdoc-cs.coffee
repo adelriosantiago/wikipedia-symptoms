@@ -27,6 +27,7 @@ $ ->
 			console.log msg
 			window.wordsMatch = msg.diseases
 			generate()
+			$jsonBlock
 		.error (err) ->
 			console.log "Error"
 		
@@ -36,11 +37,8 @@ $ ->
 			else if word in relevantStr then filtered.push '<span class="relevant">' + word + '</span>' 
 			else filtered.push word
 		
-		$("#filtered-symptoms").html filtered.join ','
-		
-		
+		$ "#filtered-symptoms"
+			.html filtered.join ','
 	
-	
-	
-	
-	$("#symptoms").keyup((ev) -> filter_diseases())
+	$ "#symptoms" 
+		.keyup((ev) -> filter_diseases())
