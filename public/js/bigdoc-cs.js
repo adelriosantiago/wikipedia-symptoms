@@ -11,20 +11,29 @@
   $(function() {
 
     /*
-    #TODO: Implement word quantity by slider
-    $('#cloudCount').slider {
-        formatter : (value) ->
-            return "abc: " + value
-        }
+    	#TODO: Implement word quantity by slider
+    	$('#cloudCount').slider {
+    		formatter : (value) ->
+    			return "abc: " + value
+    		}
      */
-    var connectorStr, fill, filter_diseases, relevantStr;
+    var connectorStr, filter_diseases, relevantStr;
     connectorStr = ['the', 'and', 'or'];
     relevantStr = ['pain', 'coughing', 'sneezing'];
-    (filter_diseases = function() {
-      var filtered, outString, symptoms, word, _i, _len;
+    filter_diseases = function() {
+      var callUrl, filtered, outString, symptoms, word, _i, _len;
       outString = $("#symptoms").val().replace(/[`~!@#$%^&*()_|+\=?;:'",.<>\{\}\[\]\\\/]/gi, ' ');
       symptoms = outString.split(/[\s,]+/);
       filtered = [];
+      callUrl = 'api/diagnose?symptoms=' + outString;
+      console.log(callUrl);
+      $.get(callUrl, function(msg) {
+        console.log(msg);
+        window.wordsMatch = msg.diseases;
+        return generate();
+      }).error(function(err) {
+        return console.log("Error");
+      });
       for (_i = 0, _len = symptoms.length; _i < _len; _i++) {
         word = symptoms[_i];
         if (__indexOf.call(connectorStr, word) >= 0) {
@@ -36,43 +45,10 @@
         }
       }
       return $("#filtered-symptoms").html(filtered.join(','));
-    })();
-    $("#symptoms").keyup(function(ev) {
+    };
+    return $("#symptoms").keyup(function(ev) {
       return filter_diseases();
     });
-    fill = d3.scale.category20();
-    window.thecloud = d3.layout.cloud().size([300, 300]).words([".NET", "Silverlight", "jQuery", "CSS3", "HTML5", "JavaScript", "SQL", "C#"].map(function(d) {
-      return {
-        text: d,
-        size: 10 + Math.random() * 50
-      };
-    })).rotate(function() {
-      return ~~(Math.random() * 2) * 90;
-    }).font("Impact").fontSize(function(d) {
-      return d.size;
-    }).on("end", draw).start();
-    console.dir(window.thecloud);
-    return 
-    function draw(words) {
-        d3.select("#wordcloud")
-        .append("svg")
-        .attr("width", 300)
-        .attr("height", 300)
-        .append("g")
-        .attr("transform", "translate(150,150)")
-        .selectAll("text")
-        .data(words)
-        .enter().append("text")
-        .style("font-size", function(d) { return d.size + "px"; })
-        .style("font-family", "Impact")
-        .style("fill", function(d, i) { return fill(i); })
-        .attr("text-anchor", "middle")
-        .attr("transform", function(d) {
-            return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
-        })
-        .text(function(d) { return d.text; });
-    }
-    ;
   });
 
 }).call(this);

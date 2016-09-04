@@ -15,8 +15,8 @@ app.controller 'exampleCtrl', ($scope, $http) ->
 	$scope.jsonDisplay = 'none'
 	$scope.cloudDisplay = 'block'
 
-	$scope.$watch 'inputCh', _.debounce((newText) ->
-		#console.log 'inputCh changed ' + newText
+	$scope.$watch 'filtered-symptoms', _.debounce((newText) ->
+		#console.log 'filtered-symptoms changed ' + newText
 		($http.get 'api/diagnose?symptoms=' + newText).success((data, status, headers, config) ->
 			#console.log JSON.stringify data
 			window.wordsMatch = data.diseases

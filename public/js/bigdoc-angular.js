@@ -18,7 +18,7 @@
     $scope.switchLabel = 'Switch to JSON';
     $scope.jsonDisplay = 'none';
     $scope.cloudDisplay = 'block';
-    $scope.$watch('inputCh', _.debounce(function(newText) {
+    $scope.$watch('filtered-symptoms', _.debounce(function(newText) {
       return ($http.get('api/diagnose?symptoms=' + newText)).success(function(data, status, headers, config) {
         window.wordsMatch = data.diseases;
         generate();
