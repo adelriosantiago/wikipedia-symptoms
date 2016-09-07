@@ -1,0 +1,106 @@
+//Bigdoc disease diagnosis
+
+doctype
+html(ng-app='bigdoc-app', lang='en-US')
+head
+	meta(charset='UTF-8')
+	title BigDoc disease diagnosis
+	meta(name='description', content='Lorem Ipsum Dolor sit amet')
+	meta(name='keywords', content='foo, bar, baz')
+	meta(http-equiv='X-UA-Compatible', content='IE=edge')
+	meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
+	//if lt IE 9
+		script(src='/bower/bower_components/html5shiv/dist/html5shiv.min.js')
+		script(src='/bower/bower_components/respond/dest/respond.min.js')
+	link(rel='shortcut icon', href='/favicon.ico')
+	link(rel='stylesheet', href='/bootstrap/css/bootstrap.min.css')
+	link(rel='stylesheet', href='/bootstrap/css/bootstrap-theme.min.css')
+	link(rel='stylesheet', href='/bootstrap/css/bootstrap-slider.min.css')
+	link(rel='stylesheet', href='/plugins/font-awesome/css/font-awesome.min.css')
+	link(rel='stylesheet', href='/css/bigdoc.css')
+	script(src='/js/jquery.min.js')
+	script(src='/js/underscore.js')
+	//script(src='/js/angular/angular.min.js')
+	//script(src='/js/angular/angular-resource.min.js')
+
+	body
+		div.container
+			div.row
+				div.col-xs-12.common-block
+					h2 BigDoc disease diagnosis
+					//h4 Bigdoc is a small real-time app that diagnoses diseases based on signs and symptoms. With this small program you can diagnose... Read my blog post explaining how it works at... Bear mind that this symptom diagnoser is highly experimental, do *never* use this to self- medicate and/or avoid visiting a real doctor. By using this app you agree that...
+			br
+			div.row
+				div.col-xs-3
+					h4 Write your symptoms here as if you were talking to a doctor
+					div.row.text-center(style='display: none;')
+						div.col-xs-4.nopadding
+							a Common cold
+							//i.fa.fa-home
+						div.col-xs-4.nopadding
+							a Diabetes
+						div.col-xs-4.nopadding
+							a GERD
+					textarea#symptoms.margin-top-10
+					h4 Based on your input, here is a list of some relevant signs and symptoms:
+					pre
+						filter(id='filtered-symptoms')
+					//h4 Bigdoc is now searching for these information on several thousand articles from the internet:
+					//	div
+					//		h1 screen
+					div.row
+						div.col-xs-6
+							p
+								label(for='max') Results:
+									input#max(value="15" min="1" type="number")
+						div.col-xs-6
+							p
+								input#ex1(data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="14" style='display: none;')
+				div.col-xs-9
+					h4 As you write, here are the names of the diseases that match your input:
+						div(class="panel panel-default margin-top-10" style='min-width: 800px;')
+							div.panel-heading
+								button#dataSwitch(class="btn btn-default btn-xs right" type="button")
+									span
+										p.label Switch to JSON
+								br
+							div.panel-body
+								pre#json(style="display: none;")
+									//JSON will appear here
+								div#wordcloud(style='min-width: 800px;')
+									//Wordcloud will appear here
+								form#form
+									p(style='position: absolute; right: 0px; top: 0px; display: none;')#status 5/5
+							div.panel-footer(style='display: none;')
+								div
+									p
+										label Spiral:
+										label(for='archimedean')
+											input#archimedean(name="spiral" value="archimedean" checked="checked" type="radio")
+											Archimedean
+										label(for='rectangular')
+											input#rectangular(name="spiral" value="rectangular" type="radio")
+											Rectangular
+									p
+										label Scale:
+										label(for='scale-log')
+											input#scale-log(name="scale" value="log" checked="checked" type="radio")
+											log n
+										label(for='scale-sqrt')
+											input#scale-sqrt(name="scale" value="sqrt" type="radio")
+											√n
+										label(for='scale-linear')
+											input#scale-linear(name="scale" value="linear" type="radio")
+											n
+									p
+										label Font:
+											input#font(value="Impact" type="text")
+						//h4 There are 80% chances that the described symptoms are related to:
+							//h1 disease
+
+	//script(src='/js/bigdoc-angular.js')
+	script(src='/js/bigdoc-cs.js')
+	script(src='/js/d3.min.js')
+	script(src='/js/d3.wordcloud.js')
+	script(src='/bootstrap/js/bootstrap.min.js')
+	script(src='/bootstrap/js/bootstrap-slider.min.js')

@@ -18,14 +18,22 @@
     $scope.switchLabel = 'Switch to JSON';
     $scope.jsonDisplay = 'none';
     $scope.cloudDisplay = 'block';
-    $scope.$watch('filtered-symptoms', _.debounce(function(newText) {
-      return ($http.get('api/diagnose?symptoms=' + newText)).success(function(data, status, headers, config) {
-        window.wordsMatch = data.diseases;
-        generate();
-        $scope.resultJSON = JSON.stringify(data, null, 4);
-        return console.log(data);
-      }).error(function(data, status, headers, config) {});
-    }, refreshRate));
+
+    /*$scope.$watch 'filtered-symptoms', _.debounce((newText) ->
+    		#console.log 'filtered-symptoms changed ' + newText
+    		($http.get 'api/diagnose?symptoms=' + newText).success((data, status, headers, config) ->
+    			#console.log JSON.stringify data
+    			window.wordsMatch = data.diseases
+    			#console.log window.wordsMatch
+    			generate()
+    			$scope.resultJSON = JSON.stringify(data, null, 4)
+    			console.log data
+    			#var tags = JSON.parse data.diseases
+    		).error((data, status, headers, config) ->
+    			#Log error
+    		);
+    	, refreshRate)
+     */
     $scope.switchData = function() {
       jsonOnly = !jsonOnly;
       if (jsonOnly) {

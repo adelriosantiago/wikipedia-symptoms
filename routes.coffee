@@ -15,10 +15,10 @@ module.exports = (app, passport) ->
 
 	#Bigdoc hompage
 	app.get "/", (req, res) ->
-		res.render "home.jade"
+		res.render "index.jade"
 
-	#Normalize big data
-	app.get "/purgeData", (req, res) ->
+	#Normalize big data //TODO: Change this to a script
+	###app.get "/purgeData", (req, res) ->
 		MongoClient.connect mongoDBUrl, (err, db) ->
 			if err
 				console.log "Error"
@@ -31,14 +31,14 @@ module.exports = (app, passport) ->
 				
 				max = 0
 				min = 0
-				_.each docs, (el) ->					
+				_.each docs, (el) ->
 					(db.collection 'diseases').update { _id : el._id }, { _id : slugg(el._id) }
 					console.log "slugged " + slugg(el._id)
 					
 					#console.log "DOC:" + el.text.length
 				
-				db.close()				
-				return res.json { status: "Done" }
+				db.close()
+				return res.json { status: "Done" }###
 	
 	#Bigdoc API get diagnose
 	app.get "/api/diagnose", (req, res) ->

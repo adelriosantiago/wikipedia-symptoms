@@ -219,7 +219,7 @@ var fill = d3.scale.category20b(),
     }).text(function(t) {
         return t.key
     }).on("word", progress).on("end", draw),
-    svg = d3.select("#vis").append("svg").attr("width", w).attr("height", h),
+    svg = d3.select("#wordcloud").append("svg").attr("width", w).attr("height", h),
     background = svg.append("g"),
     vis = svg.append("g").attr("transform", "translate(" + [w >> 1, h >> 1] + ")");
     //vis = svg.append("g")
@@ -293,7 +293,3 @@ function draw(t, e) {
     
     console.log("test");
 }
-
-$('input[type=radio], #font, #max').change(function () {
-    generate();
-});

@@ -15,6 +15,7 @@ $ ->
 	
 	connectorStr = ['the', 'and', 'or']
 	relevantStr = ['pain', 'coughing', 'sneezing']
+	jsonOnly = false
 	
 	filter_diseases = ->
 		outString = $("#symptoms").val().replace(/[`~!@#$%^&*()_|+\=?;:'",.<>\{\}\[\]\\\/]/gi, ' ');
@@ -25,9 +26,11 @@ $ ->
 		console.log callUrl
 		$.get callUrl, (msg) ->
 			console.log msg
-			window.wordsMatch = msg.diseases
-			generate()
-			$jsonBlock
+			if jsonOnly
+				$("#json").html JSON.stringify msg, null, 4
+			else
+				window.wordsMatch = msg.diseases
+				generate()
 		.error (err) ->
 			console.log "Error"
 		
@@ -42,3 +45,27 @@ $ ->
 	
 	$ "#symptoms" 
 		.keyup((ev) -> filter_diseases())
+		
+	$ "#dataSwitch" 
+		.on 'click', (ev) -> 
+			jsonOnly = !jsonOnly
+			
+			
+			if jsonOnly
+				$("#dataSwitch .label").html("Switch to Word Cloud");
+				#Enable JSON
+				$("#json").show();
+				$("#wordcloud").hide();
+				refreshRate = 100
+			else
+				$("#dataSwitch .label").html('Switch to JSON');
+				#Enable Word Cloud
+				$("#json").hide();
+				$("#wordcloud").show();
+				refreshRate = 500
+			
+		
+	$ "input[type=radio], #font, #max"
+		.change () -> generate();
+		
+

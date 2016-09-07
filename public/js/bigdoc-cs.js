@@ -17,9 +17,10 @@
     			return "abc: " + value
     		}
      */
-    var connectorStr, filter_diseases, relevantStr;
+    var connectorStr, filter_diseases, jsonOnly, relevantStr;
     connectorStr = ['the', 'and', 'or'];
     relevantStr = ['pain', 'coughing', 'sneezing'];
+    jsonOnly = false;
     filter_diseases = function() {
       var callUrl, filtered, outString, symptoms, word, _i, _len;
       outString = $("#symptoms").val().replace(/[`~!@#$%^&*()_|+\=?;:'",.<>\{\}\[\]\\\/]/gi, ' ');
@@ -29,9 +30,12 @@
       console.log(callUrl);
       $.get(callUrl, function(msg) {
         console.log(msg);
-        window.wordsMatch = msg.diseases;
-        generate();
-        return $jsonBlock;
+        if (jsonOnly) {
+          return $("#json").html(JSON.stringify(msg, null, 4));
+        } else {
+          window.wordsMatch = msg.diseases;
+          return generate();
+        }
       }).error(function(err) {
         return console.log("Error");
       });
@@ -47,8 +51,26 @@
       }
       return $("#filtered-symptoms").html(filtered.join(','));
     };
-    return $("#symptoms").keyup(function(ev) {
+    $("#symptoms").keyup(function(ev) {
       return filter_diseases();
+    });
+    $("#dataSwitch").on('click', function(ev) {
+      var refreshRate;
+      jsonOnly = !jsonOnly;
+      if (jsonOnly) {
+        $("#dataSwitch .label").html("Switch to Word Cloud");
+        $("#json").show();
+        $("#wordcloud").hide();
+        return refreshRate = 100;
+      } else {
+        $("#dataSwitch .label").html('Switch to JSON');
+        $("#json").hide();
+        $("#wordcloud").show();
+        return refreshRate = 500;
+      }
+    });
+    return $("input[type=radio], #font, #max").change(function() {
+      return generate();
     });
   });
 

@@ -77,8 +77,14 @@ textarea#symptoms {
 }
 
 #max {
-    width: 40px;
-    margin: 0px 5px;
+	width: 40px;
+	margin: 0px 5px;
+}
+
+#dataSwitch p.label {
+	color: black;
+	font-size: 10px;
+	font-weight: normal;
 }
 
 span.connector {

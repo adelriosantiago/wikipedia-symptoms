@@ -15,7 +15,7 @@ app.controller 'exampleCtrl', ($scope, $http) ->
 	$scope.jsonDisplay = 'none'
 	$scope.cloudDisplay = 'block'
 
-	$scope.$watch 'filtered-symptoms', _.debounce((newText) ->
+	###$scope.$watch 'filtered-symptoms', _.debounce((newText) ->
 		#console.log 'filtered-symptoms changed ' + newText
 		($http.get 'api/diagnose?symptoms=' + newText).success((data, status, headers, config) ->
 			#console.log JSON.stringify data
@@ -28,7 +28,7 @@ app.controller 'exampleCtrl', ($scope, $http) ->
 		).error((data, status, headers, config) ->
 			#Log error
 		);
-	, refreshRate)
+	, refreshRate)###
 		
 	$scope.switchData = () ->
 		#$scope.quantityResult = calculateService.calculate($scope.quantity, 10);
@@ -40,7 +40,6 @@ app.controller 'exampleCtrl', ($scope, $http) ->
 			$scope.jsonDisplay = 'block'
 			$scope.cloudDisplay = 'none'
 			refreshRate = 100
-			
 		else
 			$scope.switchLabel = 'Switch to JSON'
 			#Enable Word Cloud
