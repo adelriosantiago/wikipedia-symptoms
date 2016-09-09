@@ -55,7 +55,7 @@ module.exports = (app, passport) ->
 			(db.collection 'diseases').aggregate([
 				{ $match: { $text: { $search: symptoms } } },
 				#{$project: {"_id" : 0, "key" : "$_id", value: {$multiply : [{ $meta: "textScore" }, 10]}}}, #Old version, no longer used
-				{ $project: { "_id" : 0, "key" : "$_id", value: { $meta: "textScore" } } },
+				{ $project: { "_id" : 0, "key" : "$id", value: { $meta: "textScore" } } },
 				{ $sort: { score: { $meta: "textScore" } } },
 				{ $limit: limit }
 			]).toArray((err, docs) ->
@@ -70,7 +70,6 @@ module.exports = (app, passport) ->
 					dDiff = dMax - dMin
 					dFactor = 1 / dDiff
 					#TODO: Fix scores in accordance to text quantity
-					
 					
 					#Draw words for each value
 					docs.forEach (item) ->

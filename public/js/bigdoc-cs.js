@@ -40,6 +40,7 @@
         console.log(msg);
         $("#json").html(JSON.stringify(msg, null, 4));
         window.wordsMatch = msg.diseases;
+        console.log(msg.diseases);
         return generate();
       }).error(function(err) {
         return console.log("Error");

@@ -37,6 +37,9 @@ $ ->
 			
 			$("#json").html JSON.stringify msg, null, 4
 			window.wordsMatch = msg.diseases
+			
+			console.log msg.diseases
+			
 			generate()
 		.error (err) ->
 			console.log "Error"
