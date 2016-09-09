@@ -46,7 +46,7 @@ module.exports = (app, passport) ->
 
 		symptoms = req.query.symptoms
 		limit = req.query.limit #TODO: Convert to int and erase the next line
-		limit = 15 #Hardcoded limit
+		#limit = 15 #Hardcoded limit
 
 		MongoClient.connect mongoDBUrl, (err, db) ->
 			if err

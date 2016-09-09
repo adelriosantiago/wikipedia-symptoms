@@ -226,7 +226,7 @@ var fill = d3.scale.category20b(),
     //    .attr("width", '100%')
     //    .attr("height", '100%')
 
-function generate() {
+function generate(wordsMatch) {
     //TODO: Sort descending the array wordsMatch here
     layout.font(d3.select("#font").property("value")).spiral(d3.select("input[name=spiral]:checked").property("value"))
     

@@ -2,7 +2,6 @@
 
 window.thecloud = null;
 window.drawfunc = null;
-window.wordsMatch = null;
 
 $ ->
 	###
@@ -24,23 +23,19 @@ $ ->
 	connectorStr = ['the', 'and', 'or']
 	relevantStr = ['pain', 'coughing', 'sneezing']
 	jsonOnly = false
+	wordsMatch = {}
 	
-	filter_diseases = ->
+	filter_diseases = (limit) ->
 		outString = $("#symptoms").val().replace(/[`~!@#$%^&*()_|+\=?;:'",.<>\{\}\[\]\\\/]/gi, ' ');
 		symptoms = outString.split /[\s,]+/
 		filtered = []
 		
-		callUrl = 'api/diagnose?symptoms=' + outString
+		callUrl = 'api/diagnose?symptoms=' + outString + '&limit=' + limit
 		console.log callUrl
 		$.get callUrl, (msg) ->
-			console.log msg
-			
 			$("#json").html JSON.stringify msg, null, 4
-			window.wordsMatch = msg.diseases
-			
-			console.log msg.diseases
-			
-			generate()
+			wordsMatch = msg.diseases
+			generate(wordsMatch)
 		.error (err) ->
 			console.log "Error"
 		
@@ -74,6 +69,8 @@ $ ->
 			
 		
 	$ "input[type=radio], #font, #max"
-		.change () -> generate();
+		.change () ->
+			filter_diseases +d3.select("#max").property("value")
+			return
 		
 
