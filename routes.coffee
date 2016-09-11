@@ -45,7 +45,7 @@ module.exports = (app, passport) ->
 		#TODO: Sanitize query.symptoms entry
 
 		symptoms = req.query.symptoms
-		limit = req.query.limit #TODO: Convert to int and erase the next line
+		limit = +req.query.limit #TODO: Convert to int and erase the next line
 		#limit = 15 #Hardcoded limit
 
 		MongoClient.connect mongoDBUrl, (err, db) ->
@@ -85,7 +85,7 @@ module.exports = (app, passport) ->
 
 	#Bigdoc API get info
 	app.get "/api/info", (req, res) ->
-		res.json "{db_status:null, db_entries:null}"
+		res.json "{ db_status: null, db_entries: null }"
 	 
 	#TO-DO: Uncomment when we have no more missing loading resources (these resources reach this route)
 	##All else (this route *must* be last on this file!)
