@@ -6,47 +6,61 @@ window.drawfunc = null;
 $ ->
 	
 	
-	`
-	var fill = d3.scale.category20b(),
-		w = 800,
-		h = 600,
-		words = [],
-		max, 
-		scale = 1,
-		complete = 0,
-		keyword = "",
-		fontSize, 
-		maxLength = 100,
-		fetcher, 
-		statusText = d3.select("#status"),
-		layout = d3.layout.cloud().timeInterval(10).size([w, h]).fontSize(function(t) {
-			return fontSize(+t.value)
-		}).text(function(t) {
-			return t.key
-		}).on("word", progress).on("end", draw),
-		svg = d3.select("#wordcloud").append("svg").attr("width", w).attr("height", h),
-		background = svg.append("g"),
-		vis = svg.append("g").attr("transform", "translate(" + [w >> 1, h >> 1] + ")");
-		//vis = svg.append("g")
-		//    .attr("width", '100%')
-		//    .attr("height", '100%')
-
-	function generate(wordsMatch) {
-		//TODO: Sort descending the array wordsMatch here
-		layout.font(d3.select("#font").property("value")).spiral(d3.select("input[name=spiral]:checked").property("value"))
+	fill = d3.scale.category20b()
+	w = 800
+	h = 600
+	words = []
+	max = undefined
+	scale = 1
+	complete = 0
+	keyword = ''
+	fontSize = undefined
+	maxLength = 100
+	fetcher = undefined
+	statusText = d3.select('#status')
+	layout = d3.layout.cloud().timeInterval(10).size([
+		w
+		h
+	]).fontSize((t) ->
+		fontSize +t.value
+	).text((t) ->
+		t.key
+	).on('word', progress).on('end', draw)
+	svg = d3.select('#wordcloud').append('svg').attr('width', w).attr('height', h)
+	background = svg.append('g')
+	vis = svg.append('g').attr('transform', 'translate(' + [
+		w >> 1
+		h >> 1
+	] + ')')
+	#vis = svg.append("g")
+	#    .attr("width", '100%')
+	#    .attr("height", '100%')
+	
+	generate = (wordsMatch) ->
+		console.log "generate"
 		
-		fontSize = d3.scale[d3.select("input[name=scale]:checked").property("value")]().range([10, 50]);
-		wordsMatch.length && fontSize.domain([+wordsMatch[wordsMatch.length - 1].value || 1, +wordsMatch[0].value]);
-		complete = 0;
-		statusText.style("display", null);
-		words = [];
-		layout.stop().words(wordsMatch.slice(0, max = Math.min(wordsMatch.length, +d3.select("#max").property("value")))).start();
-	}
+		#TODO: Sort descending the array wordsMatch here
+		layout.font(d3.select('#font').property('value')).spiral d3.select('input[name=spiral]:checked').property('value')
+		fontSize = d3.scale[d3.select('input[name=scale]:checked').property('value')]().range([
+			10
+			50
+		])
+		wordsMatch.length and fontSize.domain([
+			+wordsMatch[wordsMatch.length - 1].value or 1
+			+wordsMatch[0].value
+		])
+		complete = 0
+		statusText.style 'display', null
+		words = []
+		layout.stop().words(wordsMatch.slice(0, max = Math.min(wordsMatch.length, +d3.select('#max').property('value')))).start()
+		return
 
-	function progress() {
-		statusText.text(++complete + "/" + max)
-	}
-
+	progress = ->
+		statusText.text ++complete + '/' + max
+		console.log "progress"
+		return
+		
+	`
 	function draw(t, e) {
 		statusText.style("display", "none");
 		scale = e ? Math.min(w / Math.abs(e[1].x - w / 2), w / Math.abs(e[0].x - w / 2), h / Math.abs(e[1].y - h / 2), h / Math.abs(e[0].y - h / 2)) / 2 : 1;
@@ -97,8 +111,9 @@ $ ->
 			}));
 		
 		console.log("test");
-	}	
+	}
 	`
+
 	
 	###
 	#TODO: Implement word quantity by slider
