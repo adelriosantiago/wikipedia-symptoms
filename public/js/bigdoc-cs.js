@@ -31,21 +31,19 @@
 		//vis = svg.append("g")
 		//    .attr("width", '100%')
 		//    .attr("height", '100%')
+
+	function generate(wordsMatch) {
+		//TODO: Sort descending the array wordsMatch here
+		layout.font(d3.select("#font").property("value")).spiral(d3.select("input[name=spiral]:checked").property("value"))
 		
-	;
-    var connectorStr, filter_diseases, generate, jsonOnly, relevantStr, wordsMatch;
-    generate = function(wordsMatch) {
-      var complete, fontSize, max, words;
-      layout.font(d3.select('#font').property('value')).spiral(d3.select('input[name=spiral]:checked').property('value'));
-      fontSize = d3.scale[d3.select('input[name=scale]:checked').property('value')]().range([10, 50]);
-      wordsMatch.length && fontSize.domain([+wordsMatch[wordsMatch.length - 1].value || 1, +wordsMatch[0].value]);
-      complete = 0;
-      statusText.style('display', null);
-      words = [];
-      layout.stop().words(wordsMatch.slice(0, max = Math.min(wordsMatch.length, +d3.select('#max').property('value')))).start();
-    };
-    
-	
+		fontSize = d3.scale[d3.select("input[name=scale]:checked").property("value")]().range([10, 50]);
+		wordsMatch.length && fontSize.domain([+wordsMatch[wordsMatch.length - 1].value || 1, +wordsMatch[0].value]);
+		complete = 0;
+		statusText.style("display", null);
+		words = [];
+		layout.stop().words(wordsMatch.slice(0, max = Math.min(wordsMatch.length, +d3.select("#max").property("value")))).start();
+	}
+
 	function progress() {
 		statusText.text(++complete + "/" + max)
 	}
@@ -100,7 +98,7 @@
 			}));
 		
 		console.log("test");
-	}
+	}	
 	;
 
     /*
@@ -118,6 +116,7 @@
     		diabetes : "I constanly feel thirsty, like if I couldn't quench my thirst. By this reason I'm going to the bathroom very often, I go pee like 12 or 15 times a day when I would usually go like 4 times as much. Also, waking up and going to pee in the middle of the night is becoming really usual and annoying for me. As an additional symptom my vision is slightly blurred too."
     		GERD : "I have a burning sensation in my chest, I describe it like \"fire\" inside my. When eating, I find it more difficult to swallow the food, therefore I eat and immediately drink water, usually cold water because of the \"fire\" feeling... Also I cough a lot and noticed that now I have a bad breath issue."
      */
+    var connectorStr, filter_diseases, jsonOnly, relevantStr, wordsMatch;
     connectorStr = ['the', 'and', 'or'];
     relevantStr = ['pain', 'coughing', 'sneezing'];
     jsonOnly = false;
