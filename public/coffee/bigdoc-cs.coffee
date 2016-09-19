@@ -60,8 +60,7 @@ $ ->
 		console.log "progress"
 		return
 		
-	`
-	function draw(t, e) {
+	`function draw(t, e) {
 		statusText.style("display", "none");
 		scale = e ? Math.min(w / Math.abs(e[1].x - w / 2), w / Math.abs(e[0].x - w / 2), h / Math.abs(e[1].y - h / 2), h / Math.abs(e[0].y - h / 2)) / 2 : 1;
 		words = t;
@@ -111,8 +110,7 @@ $ ->
 			}));
 		
 		console.log("test");
-	}
-	`
+	}`
 
 	
 	###
