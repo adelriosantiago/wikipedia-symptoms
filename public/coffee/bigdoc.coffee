@@ -1,11 +1,6 @@
 # Bigdoc big data symptom analysis by @adelriosantiago
 
-window.thecloud = null;
-window.drawfunc = null;
-
 $ ->
-	
-	
 	fill = d3.scale.category20b()
 	w = 800
 	h = 600
@@ -60,6 +55,7 @@ $ ->
 		console.log "progress"
 		return
 		
+	#TODO: Change this last method to CS
 	`function draw(t, e) {
 		statusText.style("display", "none");
 		scale = e ? Math.min(w / Math.abs(e[1].x - w / 2), w / Math.abs(e[0].x - w / 2), h / Math.abs(e[1].y - h / 2), h / Math.abs(e[0].y - h / 2)) / 2 : 1;
@@ -91,7 +87,7 @@ $ ->
 			r.appendChild(this)
 		})
 		
-		a.transition().duration(1e3).style("opacity", 1e-6).remove(),
+		a.transition().duration(2e3).style("opacity", 1e-6).remove(),
 		vis.transition()
 			.duration(1e3)
 			.attr("transform", "translate(" + [w >> 1, h >> 1] + ")scale(" + scale + ")")
@@ -111,7 +107,6 @@ $ ->
 		
 		console.log("test");
 	}`
-
 	
 	###
 	#TODO: Implement word quantity by slider
@@ -128,7 +123,6 @@ $ ->
 		diabetes : "I constanly feel thirsty, like if I couldn't quench my thirst. By this reason I'm going to the bathroom very often, I go pee like 12 or 15 times a day when I would usually go like 4 times as much. Also, waking up and going to pee in the middle of the night is becoming really usual and annoying for me. As an additional symptom my vision is slightly blurred too."
 		GERD : "I have a burning sensation in my chest, I describe it like \"fire\" inside my. When eating, I find it more difficult to swallow the food, therefore I eat and immediately drink water, usually cold water because of the \"fire\" feeling... Also I cough a lot and noticed that now I have a bad breath issue."
 	###
-	
 	
 	connectorStr = ['the', 'and', 'or']
 	relevantStr = ['pain', 'coughing', 'sneezing']
@@ -175,13 +169,8 @@ $ ->
 				#Enable Word Cloud
 				$("#json").hide();
 				$("#wordcloud").show();
-			
-		
+
 	$ "input[type=radio], #font, #max"
 		.change () ->
 			filter_diseases +d3.select("#max").property("value")
 			return
-		
-		
-	
-

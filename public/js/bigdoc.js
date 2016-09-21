@@ -2,10 +2,6 @@
 (function() {
   var __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
-  window.thecloud = null;
-
-  window.drawfunc = null;
-
   $(function() {
     var background, complete, connectorStr, fetcher, fill, filter_diseases, fontSize, generate, h, jsonOnly, keyword, layout, max, maxLength, progress, relevantStr, scale, statusText, svg, vis, w, words, wordsMatch;
     fill = d3.scale.category20b();
@@ -73,7 +69,7 @@
 			r.appendChild(this)
 		})
 		
-		a.transition().duration(1e3).style("opacity", 1e-6).remove(),
+		a.transition().duration(2e3).style("opacity", 1e-6).remove(),
 		vis.transition()
 			.duration(1e3)
 			.attr("transform", "translate(" + [w >> 1, h >> 1] + ")scale(" + scale + ")")
