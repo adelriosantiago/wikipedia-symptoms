@@ -63,15 +63,21 @@ $ ->
 		var n = vis.selectAll("text").data(words, function(t) {
 			return t.text.toLowerCase()
 		});
+		
+		//Draw the new words
 		n.transition().duration(1e3).attr("transform", function(t) {
 			return "translate(" + [t.x, t.y] + ")rotate(" + t.rotate + ")"
 		}).style("font-size", function(t) {
 			return t.size + "px"
-		}), n.enter().append("text").attr("text-anchor", "middle").attr("transform", function(t) {
+		}), 
+		
+		n.enter().append("text").attr("text-anchor", "middle").attr("transform", function(t) {
 			return "translate(" + [t.x, t.y] + ")rotate(" + t.rotate + ")"
-		}).style("font-size", "1px").transition().duration(1e3).style("font-size", function(t) {
+		}).style("font-size", "1px").transition().duration(3e3).style("font-size", function(t) {
 			return t.size + "px"
-		}), n.style("font-family", function(t) {
+		}),
+		
+		n.style("font-family", function(t) {
 			return t.font
 		}).style("fill", function(t) {
 			return fill(t.text.toLowerCase())
@@ -87,16 +93,18 @@ $ ->
 			r.appendChild(this)
 		})
 		
-		a.transition().duration(2e3).style("opacity", 1e-6).remove(),
-		vis.transition()
-			.duration(1e3)
-			.attr("transform", "translate(" + [w >> 1, h >> 1] + ")scale(" + scale + ")")
+		a.transition().duration(3e3).style("opacity", 1e-6).remove(), //Clear the old words
+		//a.transition().duration(5e3).style("font-size", "1px"); //Why is this not working!?
+		
+		console.log(a);
+		
+		//Slowly zoom to the results
+		vis.transition().duration(5e3).attr("transform", "translate(" + [w >> 1, h >> 1] + ")scale(" + scale + ")")
 			.each("end", _.once(function() {
 				console.log("end");
 				//TODO: Remove top coloring
 				n.transition().duration(5e3).style("fill", function(t) {
 					//return fill(t.text.toLowerCase()) //This would make all words randomly colorful
-					//console.log(t);
 					if (t.size > 45) {
 						return "rgb(" + t.size * 5 + ", 0, 0)";
 					} else {
