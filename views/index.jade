@@ -24,20 +24,18 @@ head
 	body
 		div.container
 			div.row
-				div.col-xs-12.common-block
-					h2 BigDoc disease diagnosis
+				div.col-sm-12.col-md-12.col-lg-3
+					h2.text-center BigDoc disease diagnosis
 					//h4 Bigdoc is a small real-time app that diagnoses diseases based on signs and symptoms. With this small program you can diagnose... Read my blog post explaining how it works at... Bear mind that this symptom diagnoser is highly experimental, do *never* use this to self- medicate and/or avoid visiting a real doctor. By using this app you agree that...
-			br
-			div.row
-				div.col-xs-3
+					br
 					h4 Write your symptoms here as if you were talking to a doctor
 					div.row.text-center(style='display: none;')
-						div.col-xs-4.nopadding
+						div.col-lg-4.nopadding
 							a Common cold
 							//i.fa.fa-home
-						div.col-xs-4.nopadding
+						div.col-lg-4.nopadding
 							a Diabetes
-						div.col-xs-4.nopadding
+						div.col-lg-4.nopadding
 							a GERD
 					textarea#symptoms.margin-top-10
 					h4 Based on your input, here is a list of some relevant signs and symptoms:
@@ -47,54 +45,52 @@ head
 					//	div
 					//		h1 screen
 					div.row
-						div.col-xs-6
+						div.col-lg-6
 							p
 								label(for='max') Results:
 									input#max(value="15" min="1" type="number")
-						div.col-xs-6
+						div.col-lg-6
 							p
 								input#ex1(data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="14" style='display: none;')
-				div.col-xs-9
-					h4 As you write, here are the names of the diseases that match your input:
-						div(class="panel panel-default margin-top-10" style='min-width: 800px;')
-							div.panel-heading
-								button#dataSwitch(class="btn btn-default btn-xs right" type="button")
-									span
-										p.label Switch to JSON
-								br
-							div.panel-body
-								pre#json(style="display: none;")
-									//JSON will appear here
-								div#wordcloud(style='min-width: 800px;')
-									//Wordcloud will appear here
-								form#form
-									p(style='position: absolute; right: 0px; top: 0px; display: none;')#status 5/5
-							div.panel-footer(style='display: none;')
-								div
-									p
-										label Spiral:
-										label(for='archimedean')
-											input#archimedean(name="spiral" value="archimedean" checked="checked" type="radio")
-											Archimedean
-										label(for='rectangular')
-											input#rectangular(name="spiral" value="rectangular" type="radio")
-											Rectangular
-									p
-										label Scale:
-										label(for='scale-log')
-											input#scale-log(name="scale" value="log" checked="checked" type="radio")
-											log n
-										label(for='scale-sqrt')
-											input#scale-sqrt(name="scale" value="sqrt" type="radio")
-											√n
-										label(for='scale-linear')
-											input#scale-linear(name="scale" value="linear" type="radio")
-											n
-									p
-										label Font:
-											input#font(value="Impact" type="text")
-						//h4 There are 80% chances that the described symptoms are related to:
-							//h1 disease
+				div.col-sm-12.col-md-12.col-lg-9
+					div(class="panel panel-default margin-top-10" style='min-width: 800px;')
+						div.panel-heading
+							p(style='display: inline-block;')#status 5/5
+							button#dataSwitch(class="btn btn-default btn-xs right" type="button")
+								span
+									p.label Switch to JSON
+							br
+						div.panel-body
+							pre#json(style="display: none;")
+								//JSON will appear here
+							div#wordcloud(style='min-width: 800px;')
+								//Wordcloud will appear here
+						div.panel-footer(style='display: none;')
+							div
+								p
+									label Spiral:
+									label(for='archimedean')
+										input#archimedean(name="spiral" value="archimedean" checked="checked" type="radio")
+										Archimedean
+									label(for='rectangular')
+										input#rectangular(name="spiral" value="rectangular" type="radio")
+										Rectangular
+								p
+									label Scale:
+									label(for='scale-log')
+										input#scale-log(name="scale" value="log" checked="checked" type="radio")
+										log n
+									label(for='scale-sqrt')
+										input#scale-sqrt(name="scale" value="sqrt" type="radio")
+										√n
+									label(for='scale-linear')
+										input#scale-linear(name="scale" value="linear" type="radio")
+										n
+								p
+									label Font:
+										input#font(value="Impact" type="text")
+					//h4 There are 80% chances that the described symptoms are related to:
+						//h1 disease
 	
 	script(src='/js/d3.min.js')
 	script(src='/js/d3.wordcloud.js')

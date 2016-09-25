@@ -3,7 +3,7 @@
   var __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
   $(function() {
-    var background, complete, connectorStr, fetcher, fill, filter_diseases, fontSize, generate, h, jsonOnly, keyword, layout, max, maxLength, progress, relevantStr, scale, statusText, svg, vis, w, words, wordsMatch;
+    var background, complete, connectorStr, fetcher, fill, filter_diseases, fontSize, generate, h, jsonOnly, keyword, layout, max, maxLength, relevantStr, scale, statusText, svg, vis, w, words, wordsMatch;
     fill = d3.scale.category20b();
     w = 800;
     h = 600;
@@ -30,16 +30,22 @@
       fontSize = d3.scale[d3.select('input[name=scale]:checked').property('value')]().range([10, 50]);
       wordsMatch.length && fontSize.domain([+wordsMatch[wordsMatch.length - 1].value || 1, +wordsMatch[0].value]);
       complete = 0;
-      statusText.style('display', null);
       words = [];
       layout.stop().words(wordsMatch.slice(0, max = Math.min(wordsMatch.length, +d3.select('#max').property('value')))).start();
     };
-    progress = function() {
-      statusText.text(++complete + '/' + max);
-      console.log("progress");
-    };
-    function draw(t, e) {
-		statusText.style("display", "none");
+
+    /*progress = ->
+    		console.log "progress"
+    		#statusText.text ++complete + '/' + max
+    		#statusText.text "ABC"
+    		return
+     */
+    function progress() {
+		console.log("ZXCV");
+	}
+	
+	function draw(t, e) {
+		console.log("draw");
 		scale = e ? Math.min(w / Math.abs(e[1].x - w / 2), w / Math.abs(e[0].x - w / 2), h / Math.abs(e[1].y - h / 2), h / Math.abs(e[0].y - h / 2)) / 2 : 1;
 		words = t;
 		var n = vis.selectAll("text").data(words, function(t) {
@@ -78,8 +84,6 @@
 		a.transition().duration(3e3).style("opacity", 1e-6).remove(), //Clear the old words
 		//a.transition().duration(5e3).style("font-size", "1px"); //Why is this not working!?
 		
-		console.log(a);
-		
 		//Slowly zoom to the results
 		vis.transition().duration(5e3).attr("transform", "translate(" + [w >> 1, h >> 1] + ")scale(" + scale + ")")
 			.each("end", _.once(function() {
@@ -94,8 +98,6 @@
 					}
 				})
 			}));
-		
-		console.log("test");
 	};
 
     /*

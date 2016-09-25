@@ -45,19 +45,23 @@ $ ->
 			+wordsMatch[0].value
 		])
 		complete = 0
-		statusText.style 'display', null
 		words = []
 		layout.stop().words(wordsMatch.slice(0, max = Math.min(wordsMatch.length, +d3.select('#max').property('value')))).start()
 		return
-
-	progress = ->
-		statusText.text ++complete + '/' + max
+	
+	###progress = ->
 		console.log "progress"
-		return
+		#statusText.text ++complete + '/' + max
+		#statusText.text "ABC"
+		return###
 		
 	#TODO: Change this last method to CS
-	`function draw(t, e) {
-		statusText.style("display", "none");
+	`function progress() {
+		console.log("ZXCV");
+	}
+	
+	function draw(t, e) {
+		console.log("draw");
 		scale = e ? Math.min(w / Math.abs(e[1].x - w / 2), w / Math.abs(e[0].x - w / 2), h / Math.abs(e[1].y - h / 2), h / Math.abs(e[0].y - h / 2)) / 2 : 1;
 		words = t;
 		var n = vis.selectAll("text").data(words, function(t) {
@@ -96,8 +100,6 @@ $ ->
 		a.transition().duration(3e3).style("opacity", 1e-6).remove(), //Clear the old words
 		//a.transition().duration(5e3).style("font-size", "1px"); //Why is this not working!?
 		
-		console.log(a);
-		
 		//Slowly zoom to the results
 		vis.transition().duration(5e3).attr("transform", "translate(" + [w >> 1, h >> 1] + ")scale(" + scale + ")")
 			.each("end", _.once(function() {
@@ -112,8 +114,6 @@ $ ->
 					}
 				})
 			}));
-		
-		console.log("test");
 	}`
 	
 	###
