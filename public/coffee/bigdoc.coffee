@@ -7,6 +7,7 @@ $ ->
 	words = []
 	max = undefined
 	scale = 1
+	percent = 0
 	complete = 0
 	keyword = ''
 	fontSize = undefined
@@ -48,19 +49,9 @@ $ ->
 		words = []
 		layout.stop().words(wordsMatch.slice(0, max = Math.min(wordsMatch.length, +d3.select('#max').property('value')))).start()
 		return
-	
-	###progress = ->
-		console.log "progress"
-		#statusText.text ++complete + '/' + max
-		#statusText.text "ABC"
-		return###
 		
 	#TODO: Change this last method to CS
-	`function progress() {
-		console.log("ZXCV");
-	}
-	
-	function draw(t, e) {
+	`function draw(t, e) {
 		console.log("draw");
 		scale = e ? Math.min(w / Math.abs(e[1].x - w / 2), w / Math.abs(e[0].x - w / 2), h / Math.abs(e[1].y - h / 2), h / Math.abs(e[0].y - h / 2)) / 2 : 1;
 		words = t;
@@ -73,15 +64,11 @@ $ ->
 			return "translate(" + [t.x, t.y] + ")rotate(" + t.rotate + ")"
 		}).style("font-size", function(t) {
 			return t.size + "px"
-		}), 
-		
-		n.enter().append("text").attr("text-anchor", "middle").attr("transform", function(t) {
+		}), n.enter().append("text").attr("text-anchor", "middle").attr("transform", function(t) {
 			return "translate(" + [t.x, t.y] + ")rotate(" + t.rotate + ")"
 		}).style("font-size", "1px").transition().duration(3e3).style("font-size", function(t) {
 			return t.size + "px"
-		}),
-		
-		n.style("font-family", function(t) {
+		}), n.style("font-family", function(t) {
 			return t.font
 		}).style("fill", function(t) {
 			return fill(t.text.toLowerCase())
@@ -101,11 +88,11 @@ $ ->
 		//a.transition().duration(5e3).style("font-size", "1px"); //Why is this not working!?
 		
 		//Slowly zoom to the results
-		vis.transition().duration(5e3).attr("transform", "translate(" + [w >> 1, h >> 1] + ")scale(" + scale + ")")
+		vis.transition().duration(3e3).attr("transform", "translate(" + [w >> 1, h >> 1] + ")scale(" + scale + ")")
 			.each("end", _.once(function() {
 				console.log("end");
 				//TODO: Remove top coloring
-				n.transition().duration(5e3).style("fill", function(t) {
+				n.transition().duration(3e3).style("fill", function(t) {
 					//return fill(t.text.toLowerCase()) //This would make all words randomly colorful
 					if (t.size > 45) {
 						return "rgb(" + t.size * 5 + ", 0, 0)";
@@ -114,6 +101,12 @@ $ ->
 					}
 				})
 			}));
+	}
+	
+	function progress() {
+		percent = ++complete / max
+		$('#status').text(percent);
+		bar.set(percent);
 	}`
 	
 	###
@@ -143,7 +136,6 @@ $ ->
 		filtered = []
 		
 		callUrl = 'api/diagnose?symptoms=' + outString + '&limit=' + limit
-		console.log callUrl
 		$.get callUrl, (msg) ->
 			$("#json").html JSON.stringify msg, null, 4
 			wordsMatch = msg.diseases
@@ -180,5 +172,34 @@ $ ->
 
 	$ "input[type=radio], #font, #max"
 		.change () ->
-			filter_diseases +d3.select("#max").property("value")
+			max = +d3.select("#max").property("value")
+			filter_diseases max
 			return
+	
+	bar = new (ProgressBar.Line)(progressBar,
+		strokeWidth: 4
+		easing: 'easeInOut'
+		duration: 1400
+		color: '#FFEA82'
+		trailColor: '#eee'
+		trailWidth: 1
+		svgStyle:
+			width: '100%'
+			height: '100%'
+		text:
+			style:
+				color: '#999'
+				position: 'absolute'
+				right: '0'
+				top: '30px'
+				padding: 0
+				margin: 0
+				transform: null
+			autoStyleContainer: false
+		from: color: '#FFEA82'
+		to: color: '#ED6A5A'
+		step: (state, bar) ->
+			bar.setText Math.round(bar.value() * 100) + ' %'
+			return
+	)
+	
