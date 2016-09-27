@@ -29,16 +29,27 @@ head
 					//h4 Bigdoc is a small real-time app that diagnoses diseases based on signs and symptoms. With this small program you can diagnose... Read my blog post explaining how it works at... Bear mind that this symptom diagnoser is highly experimental, do *never* use this to self- medicate and/or avoid visiting a real doctor. By using this app you agree that...
 					br
 					h4 Write your symptoms here as if you were talking to a doctor
-					div.row.text-center(style='display: none;')
-						div.col-lg-4.nopadding
-							a Common cold
-							//i.fa.fa-home
-						div.col-lg-4.nopadding
-							a Diabetes
-						div.col-lg-4.nopadding
-							a GERD
 					div.form-group
 						textarea#symptoms.form-control.margin-top-10
+					div.row
+						small
+							p Examples:
+							p
+								
+							a
+								p.inline Common cold
+							a
+								p Common cold
+							a
+								p Common cold
+						div.row.text-center
+							div.col-lg-4.nopadding
+								a Common cold
+								//i.fa.fa-home
+							div.col-lg-4.nopadding
+								a Diabetes
+							div.col-lg-4.nopadding
+								a GERD
 					h4 Based on your input, here is a list of some relevant signs and symptoms:
 					pre
 						filter(id='filtered-symptoms')
