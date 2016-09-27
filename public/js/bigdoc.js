@@ -3,14 +3,13 @@
   var __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
   $(function() {
-    var background, bar, complete, connectorStr, fetcher, fill, filter_diseases, fontSize, generate, h, jsonOnly, keyword, layout, max, maxLength, percent, relevantStr, scale, statusText, svg, vis, w, words, wordsMatch;
+    var background, bar, complete, connectorStr, fetcher, fill, filter_diseases, fontSize, generate, h, jsonOnly, keyword, layout, max, maxLength, relevantStr, scale, statusText, svg, vis, w, words, wordsMatch;
     fill = d3.scale.category20b();
     w = 800;
     h = 600;
     words = [];
     max = void 0;
     scale = 1;
-    percent = 0;
     complete = 0;
     keyword = '';
     fontSize = void 0;
@@ -87,9 +86,7 @@
 	}
 	
 	function progress() {
-		percent = ++complete / max
-		$('#status').text(percent);
-		bar.set(percent);
+		bar.set(++complete / max);
 	};
 
     /*
@@ -157,35 +154,13 @@
     });
     return bar = new ProgressBar.Line(progressBar, {
       strokeWidth: 4,
-      easing: 'easeInOut',
-      duration: 1400,
-      color: '#FFEA82',
-      trailColor: '#eee',
+      color: '#CDCDFF',
+      trailColor: '#F3F3F3',
       trailWidth: 1,
       svgStyle: {
         width: '100%',
-        height: '100%'
-      },
-      text: {
-        style: {
-          color: '#999',
-          position: 'absolute',
-          right: '0',
-          top: '30px',
-          padding: 0,
-          margin: 0,
-          transform: null
-        },
+        height: '100%',
         autoStyleContainer: false
-      },
-      from: {
-        color: '#FFEA82'
-      },
-      to: {
-        color: '#ED6A5A'
-      },
-      step: function(state, bar) {
-        bar.setText(Math.round(bar.value() * 100) + ' %');
       }
     });
   });
