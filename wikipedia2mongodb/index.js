@@ -1,74 +1,72 @@
-var Wiki = require("wikijs"),
+const wiki = require("wikijs").default,
   fs = require("fs"),
   readline = require("linebyline"),
   slugg = require("slugg"),
   MongoClient = require("mongodb").MongoClient,
   assert = require("assert");
 
-var data = {},
-  wiki = new Wiki();
+const mongoUrl = "mongodb://localhost:27017/"; //Must containt ending slash
 
-var articles = []; //Array with disease names to fetch
-var url = "mongodb://localhost:27017/bigdoc";
+let articles = []; //Array with disease names to fetch
+let rl = readline("./bulk.txt");
 
-var rl = readline("./bulk.txt");
-rl.on("line", function(line, lineCount, byteCount) {
+rl.on("line", function(line) {
   articles.push(line); //Do something with the line of text
 })
   .on("error", function(e) {
-    console.log("Error reading file");
+    throw new Error("Error reading file", e);
   })
   .on("end", function(e) {
-    console.log("End reading file");
-    console.log(articles);
+    console.log(`End reading bulk file. About to process ${ articles.length } lines.`);
+    
+    let storeTo = (articles.shift()).split(":");
+    if (storeTo.length !== 2) {
+      throw new Error("No database and collection specified. Bulk file must begin with a 'database:collection' line.");
+      return;
+    }
+    let database = storeTo[0];
+    let collection = storeTo[1];
 
-    MongoClient.connect(url, function(err, db) {
-      assert.equal(null, err);
-      console.log("Connected correctly to server");
+    MongoClient.connect(mongoUrl, function(err, client) {
+      assert.equal(err, null);
+      const db = client.db(database);
+      console.log("Connected to MongoDB");
 
       //Iterate over all articles
       articles.forEach(function(item) {
-        var name = item
+        let name = item
           .substr(item.lastIndexOf("/") + 1, item.length)
           .replace("_", " ");
-        console.log("Wikiing article: " + name);
-        wiki.page(name).then(function(page) {
+          
+        console.log("Wiki'ing article: " + name);
+        wiki().page(name).then(function(page) {
           page.content().then(function(text) {
             if (text.length == 0) return;
 
-            //TODO: Add a value { containsSymptoms : true|false } when the text contains "symptoms" or "signs"
-            var dbEntry = {
+            let dbEntry = {
               id: slugg(name),
+              length: text.length,
               title: name,
               text: text,
-              length: text.length,
               source: item,
-              date: new Date()
+              date: new Date(),
             };
 
-            //This will only insert if the entry does not exists: db.getCollection('diseases').update({length: 125212}, {$setOnInsert: {abc:10023}}, {upsert: true})
-
-            var duplicateTest = { id: dbEntry.id, length: dbEntry.length };
-            console.log("About to insert: " + name);
-            db.collection("diseases").update(
-              duplicateTest,
-              { $setOnInsert: dbEntry },
+            db.collection(collection).updateOne(
+              { id: dbEntry.id }, //Only add the document if the id and the length are different
+              { $set: dbEntry },
               { upsert: true },
               function(err, result) {
-                //Insert the document
-                assert.equal(null, err);
-                console.log("Inserted: " + name);
+                assert.equal(err, null);
+                if (result.modifiedCount) {
+                  console.log(`Updated "${dbEntry.id}" in ${database}:${collection}`);
+                } else {
+                  console.log(`Document "${dbEntry.id}" in ${database}:${collection} was not updated`);
+                }
               }
             );
           });
         });
-      });
-
-      //Create index for text
-      var collection = db.collection("diseases");
-      collection.createIndex({ text: "text" }, function(err, result) {
-        console.log(result);
-        console.log("Index created");
       });
     });
   });
