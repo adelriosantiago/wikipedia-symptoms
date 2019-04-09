@@ -1,3 +1,0 @@
-medicine:diseases
-https://simple.wikipedia.org/wiki/Argyria
-https://simple.wikipedia.org/wiki/Abscess
