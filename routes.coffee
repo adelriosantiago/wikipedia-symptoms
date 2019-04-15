@@ -1,14 +1,10 @@
-#TODO: Solve the DB not closing
-
-readline = require('linebyline')
-Wiki = require('wikijs')
 MongoClient = require('mongodb').MongoClient;
 assert = require('assert')
 slugg = require('slugg')
 _ = require('lodash')
 
 console.log "Started"
-mongoDBUrl = 'mongodb://localhost:27017/bigdoc';
+mongoDBUrl = 'mongodb://localhost:27017/';
 
 #Routes
 module.exports = (app, passport) ->
@@ -16,52 +12,30 @@ module.exports = (app, passport) ->
 	#Bigdoc hompage
 	app.get "/", (req, res) ->
 		res.render "index.jade"
-
-	#Normalize big data //TODO: Change this to a script
-	###app.get "/purgeData", (req, res) ->
-		MongoClient.connect mongoDBUrl, (err, db) ->
-			if err
-				console.log "Error"
-				console.log err
-			
-			(db.collection 'diseases').find({}).toArray (err, docs) ->
-				assert.equal err, null
-				
-				#console.log docs
-				
-				max = 0
-				min = 0
-				_.each docs, (el) ->
-					(db.collection 'diseases').update { _id : el._id }, { _id : slugg(el._id) }
-					console.log "slugged " + slugg(el._id)
-					
-					#console.log "DOC:" + el.text.length
-				
-				db.close()
-				return res.json { status: "Done" }###
 	
 	#Bigdoc API get diagnose
 	app.get "/api/diagnose", (req, res) ->
 		#TODO: Sanitize query.symptoms entry
 
 		symptoms = req.query.symptoms
-		limit = +req.query.limit #TODO: Convert to int and erase the next line
-		#limit = 15 #Hardcoded limit
+		limit = +req.query.limit
+		if limit > 30
+			limit = 30
 
-		MongoClient.connect mongoDBUrl, (err, db) ->
+		MongoClient.connect mongoDBUrl, (err, client) ->
 			if err
-				console.log err
+				throw new Error err
 		
+			db = client.db "bigdoc"
+			
 			(db.collection 'diseases').aggregate([
 				{ $match: { $text: { $search: symptoms } } },
-				#{$project: {"_id" : 0, "key" : "$_id", value: {$multiply : [{ $meta: "textScore" }, 10]}}}, #Old version, no longer used
+				#{$project: {"_id" : 0, "key" : "$_id", value: {$multiply : [{ $meta: "textScore" }, 10]}}}, #Old version
 				{ $project: { "_id" : 0, "key" : "$id", value: { $meta: "textScore" } } },
 				{ $sort: { score: { $meta: "textScore" } } },
 				{ $limit: limit }
 			]).toArray((err, docs) ->
 				assert.equal err, null
-				console.log "DOC:" + JSON.stringify docs
-				console.log docs
 				
 				if !_.isEmpty docs
 					#Make scores go from 0.0 to 1.0
@@ -73,13 +47,12 @@ module.exports = (app, passport) ->
 					
 					#Draw words for each value
 					docs.forEach (item) ->
-						console.log item.value
 						item.value = (item.value - dMin) * dFactor #Convert to 0 to 1 scale
 						item.value = item.value + 0.3 #Avoid 0 size words
 						item.value = item.value * 10 #Scale words for the word cloud
 
 				res.json { diseases: docs, symptoms: symptoms }
-				db.close()
+				client.close()
 				return
 			);
 

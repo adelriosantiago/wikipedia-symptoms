@@ -25,51 +25,36 @@ head
 		div.container
 			div.row
 				div.col-sm-12.col-md-12.col-lg-3
-					h2.text-center BigDoc disease diagnosis
-					//h4 Bigdoc is a small real-time app that diagnoses diseases based on signs and symptoms. With this small program you can diagnose... Read my blog post explaining how it works at... Bear mind that this symptom diagnoser is highly experimental, do *never* use this to self- medicate and/or avoid visiting a real doctor. By using this app you agree that...
-					br
-					h4 Write your symptoms here as if you were talking to a doctor
+					h3.text-center BigDoc disease diagnosis
+					h5 Bigdoc is a simple <strong>word-count</strong> algorith applied to disease diagnosis. Bear mind that this is highly experimental, do <strong>not</strong> use this to self-medicate!
+					h5 Write your symptoms here as if you were talking to a doctor:
 					div.form-group
-						textarea#symptoms.form-control.margin-top-10
-					div.row
-						small
-							p Examples:
-							p
-								
-							a
-								p.inline Common cold
-							a
-								p Common cold
-							a
-								p Common cold
-						div.row.text-center
-							div.col-lg-4.nopadding
-								a Common cold
-								//i.fa.fa-home
-							div.col-lg-4.nopadding
-								a Diabetes
-							div.col-lg-4.nopadding
-								a GERD
-					h4 Based on your input, here is a list of some relevant signs and symptoms:
+						textarea#symptoms.form-control.margin-top-10(placeholder="Example for 'hyperthyroidism': I have a very high pulse rate and high temperature.")
+					//-
+						h5 Or click to see an example:
+							div.row.text-center
+								div.col-lg-4.nopadding
+									a Common cold
+								div.col-lg-4.nopadding
+									a Diabetes
+								div.col-lg-4.nopadding
+									a GERD
+					h5 Parsed signs and symptoms:
 					pre
 						filter(id='filtered-symptoms')
-					//h4 Bigdoc is now searching for these information on several thousand articles from the internet:
-					//	div
-					//		h1 screen
-					div.row
-						div.col-lg-6
-							p
-								label(for='max') Results:
-									input#max(value="15" min="1" type="number")
-						div.col-lg-6
-							p
-								input#ex1(data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="14" style='display: none;')
-					div.row
-						div#progressBar
+					p Maximum number of results:
+						input#max(value="25" min="1" type="number")
+				
+					p
+						input#ex1(data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="14" style='display: none;')
+					div#progressBar
+					h5 Related article: <a href="http://adelriosantiago.com/gitblog/eng/bigdoc-wikipedia-healthcare">Diagnosing symptops using Wikipedia and wordclouds</a>
+				
 				div.col-sm-12.col-md-12.col-lg-9
 					div(class="panel panel-default margin-top-10" style='min-width: 800px;')
 						div.panel-heading
 							p(style='display: none;')#status 0/0
+							span Top possible diseases shown in red
 							button#dataSwitch(class="btn btn-default btn-xs right" type="button")
 								span
 									p.label Switch to JSON
@@ -103,8 +88,6 @@ head
 								p
 									label Font:
 										input#font(value="Impact" type="text")
-					//h4 There are 80% chances that the described symptoms are related to:
-						//h1 disease
 	
 	script(src='/js/d3.min.js')
 	script(src='/js/d3.wordcloud.js')
