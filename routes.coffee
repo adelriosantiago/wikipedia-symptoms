@@ -26,7 +26,7 @@ module.exports = (app, passport) ->
 			if err
 				throw new Error err
 		
-			db = client.db "bigdoc"
+			db = client.db "medicine"
 			
 			(db.collection 'diseases').aggregate([
 				{ $match: { $text: { $search: symptoms } } },
