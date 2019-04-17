@@ -19,8 +19,10 @@ var session = require('express-session');
 var flash = require('connect-flash');
 var device = require('express-device');
 
+const enableMultipleCPUs = false;
+
 // The application
-if (cluster.isMaster) {
+if (enableMultipleCPUs && cluster.isMaster) {
 	var cpuCount, i = undefined;
 	cpuCount = require("os").cpus().length;
 	i = 0;
@@ -72,10 +74,12 @@ if (cluster.isMaster) {
 	}
 
 	http.createServer(app).listen(app.get(port), function(){
-		var cpuNum = undefined;
-		cpuNum = parseInt(cluster.worker.id) - 1
-		cpuNum = cpuNum.toString()
-		console.log('Express server listening on port ' + port + ', cpu:worker:' + cpuNum);
+		if (enableMultipleCPUs) {
+			var cpuNum = undefined;
+			cpuNum = parseInt(cluster.worker.id) - 1
+			cpuNum = cpuNum.toString()
+		}
+		console.log('Express server listening on port ' + port + ', cpu:worker:' + (cpuNum || "1"));
 	});
 }
 

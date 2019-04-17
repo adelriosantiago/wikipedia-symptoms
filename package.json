@@ -1,9 +1,10 @@
 {
-  "name": "bigdoc-machine",
+  "name": "wikipedia-symptoms",
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon app.js --watch routes.coffee",
+    "start": "forever --verbose --uid \"wikipedia-symptoms\" -w ./app.js",
+    "dev": "nodemon app.js --watch routes.coffee",
     "coffeejs": "cd public && coffee -o js/ -cw coffee/"
   },
   "dependencies": {
