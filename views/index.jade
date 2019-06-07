@@ -26,10 +26,13 @@ head
 			div.row
 				div.col-sm-12.col-md-12.col-lg-3
 					h3.text-center <strong>wikipedia-symptoms</strong> disease diagnosis
-					h5 This is a simple <strong>word-count</strong> algorith applied to disease diagnosis. Bear mind that this is highly experimental, do <strong>not</strong> use this to self-medicate!
+					h5 This is a simple <strong>word-count</strong> algorith applied to disease diagnosis. Bear mind that this is highly experimental, do <strong>not</strong> use this to self-medicate. Top matches are shown in red.
 					h5 Write your symptoms here as if you were talking to a doctor:
 					div.form-group
-						textarea#symptoms.form-control.margin-top-10(placeholder="Example for 'hyperthyroidism': I have a very high pulse rate and high temperature.")
+						textarea#symptoms.form-control.margin-top-10(placeholder="Write symptoms here...")
+					p
+						em Example for 'hyperthyroidism': I have a very high pulse rate and high temperature.
+					br
 					//-
 						h5 Or click to see an example:
 							div.row.text-center
@@ -54,7 +57,6 @@ head
 					div(class="panel panel-default margin-top-10" style='min-width: 800px;')
 						div.panel-heading
 							p(style='display: none;')#status 0/0
-							span Top possible diseases shown in red
 							button#dataSwitch(class="btn btn-default btn-xs right" type="button")
 								span
 									p.label Switch to JSON
