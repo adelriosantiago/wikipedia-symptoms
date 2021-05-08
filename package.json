@@ -21,7 +21,7 @@
     "express-session": "*",
     "jade": "*",
     "linebyline": "^1.3.0",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.21",
     "method-override": "*",
     "mongodb": "^3.2.3",
     "node-sass-middleware": "*",
